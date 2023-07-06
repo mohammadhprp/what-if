@@ -1,34 +1,20 @@
-# Auto detect text files and perform LF normalization
-*        text=auto
-
-# Always perform LF normalization on these files
-*.dart   text
-*.gradle text
-*.html   text
-*.java   text
-*.json   text
-*.md     text
-*.py     text
-*.sh     text
-*.txt    text
-*.xml    text
-*.yaml   text
-
-# Make sure that these Windows files always have CRLF line endings in checkout
-*.bat             text eol=crlf
-*.ps1             text eol=crlf
-*.rc              text eol=crlf
-*.sln             text eol=crlf
-*.props           text eol=crlf
-*.vcxproj         text eol=crlf
-*.vcxproj.filters text eol=crlf
-# Including templatized versions.
-*.sln.tmpl        text eol=crlf
-*.props.tmpl      text eol=crlf
-*.vcxproj.tmpl    text eol=crlf
-
-# Never perform LF normalization on these files
-*.ico    binary
-*.jar    binary
-*.png    binary
-*.zip    binary
+*.h linguist-detectable=false
+*.cc linguist-detectable=false
+*.cpp linguist-detectable=false
+*.kt linguist-detectable=false
+*.rb linguist-detectable=false
+*.swift linguist-detectable=false
+*.cmake linguist-detectable=false
+*.gradle linguist-detectable=false
+*.json linguist-detectable=false
+*.plist linguist-detectable=false
+*.html linguist-detectable=false
+*.xml linguist-detectable=false
+*.xib linguist-detectable=false
+*.storyboard linguist-detectable=false
+*.manifest linguist-detectable=false
+*.entitlements linguist-detectable=false
+*..properties linguist-detectable=false
+*.xc* linguist-detectable=false
+Podfile linguist-detectable=false
+CMakeLists.txt linguist-detectable=false
