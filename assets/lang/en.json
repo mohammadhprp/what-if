@@ -1,0 +1,8 @@
+{
+    "app": {
+        "what_if": "What If?"
+    },
+    "error" :{
+        "invalid_email" :"Please enter a valid email"
+    }
+}
