@@ -58,12 +58,9 @@ class SplashScreen extends HookWidget {
             animationController.isAnimating || animationController.isCompleted;
       }
 
+      _authCheck(context);
+
       animationController.addListener(listener);
-
-      if (isAnimationComplete.value) {
-        _authCheck(context);
-      }
-
       return () {
         animationController.removeListener(listener);
       };
