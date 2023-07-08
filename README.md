@@ -18,9 +18,10 @@
 
 ## Technologies Used
 
-- Flutter for the frontend
-- Supabase for backend and storage
-- Monsterapi AI for generate Image
+- [Flutter](https://flutter.dev) used for building the frontend of the application.
+- [Supabase](https://supabase.com) used for backend and storage.
+- [Monsterapi](https://monsterapi.ai)  used to generate images for the application.
+- [Aptabase](https://aptabase.com/) used for analytics.
 
 ## Develop
 
@@ -48,9 +49,11 @@ To set up and run the Flutter project locally, follow these steps:
 
 5. Open the .env file and provide the necessary values for the following environment variables:
 
-    - ***Get SUPABASE_URL and SUPABASE_ANON_KEY***: Sign in to your Supabase account at supabase.com, and navigate to the API settings of your project. Copy the `SUPABASE_URL` and `SUPABASE_ANON_KEY` values and add them to your .env file
+    - ***Get SUPABASE_URL and SUPABASE_ANON_KEY***: Sign in to your Supabase account at [supabase.com](https://supabase.com), and navigate to the API settings of your project. Copy the `SUPABASE_URL` and `SUPABASE_ANON_KEY` values and add them to your .env file
 
-    - ***Get MASTER_API_BEARER_TOKEN and MASTER_API_X_API_KEY***: Sign up for an account at monsterapi.ai, and obtain the `MASTER_API_BEARER_TOKEN` and `MASTER_API_X_API_KEY` values. Add these values to your .env file.
+    - ***Get MASTER_API_BEARER_TOKEN and MASTER_API_X_API_KEY***: Sign up for an account at [monsterapi.ai](https://monsterapi.ai), and obtain the `MASTER_API_BEARER_TOKEN` and `MASTER_API_X_API_KEY` values. Add these values to your .env file.
+
+    - ***Get APTABASE_KEY***: Sign up for an account at [aptabase.com](https://aptabase.com), and obtain the `APTABASE_KEY` value. Add these value to your .env file
 
 6. Save the changes to the .env file.
 
