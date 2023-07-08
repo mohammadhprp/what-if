@@ -15,8 +15,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: '',
-      theme: AppTheme.light(),
+      title: 'What If?',
+      theme: AppTheme.dark(),
       routes: AppRouter.routes(),
       home: const SplashScreen(),
       navigatorKey: navigatorKey,
