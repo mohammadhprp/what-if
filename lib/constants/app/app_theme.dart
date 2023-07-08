@@ -9,7 +9,7 @@ class AppTheme {
   static ThemeData dark() => FlexThemeData.dark(
         useMaterial3: true,
         fontFamily: FontConstants.primary,
-        scheme: FlexScheme.blueM3,
+        scheme: FlexScheme.greenM3,
         primary: AppColors.primary,
 
         subThemesData: const FlexSubThemesData(
@@ -19,6 +19,9 @@ class AppTheme {
           elevatedButtonSecondarySchemeColor: SchemeColor.primary,
           elevatedButtonElevation: 0,
           elevatedButtonRadius: 12,
+          outlinedButtonSchemeColor: SchemeColor.onPrimary,
+          outlinedButtonOutlineSchemeColor: SchemeColor.primary,
+          outlinedButtonRadius: 12,
           cardElevation: 0,
           menuElevation: 0,
           dialogElevation: 0,
@@ -33,15 +36,15 @@ class AppTheme {
         // Text theme
         textTheme: TextTheme(
           displayLarge: getBlackStyle(
-            color: AppColors.white100,
-            fontSize: FontSize.s18,
+            color: AppColors.primary,
+            fontSize: FontSize.s25,
           ),
           displayMedium: getExtraBoldStyle(
             color: AppColors.white100,
             fontSize: FontSize.s17,
           ),
           displaySmall: getMediumStyle(
-            color: AppColors.grey400,
+            color: AppColors.grey100,
             fontSize: FontSize.s16,
           ),
           titleLarge: getBoldStyle(
@@ -53,7 +56,7 @@ class AppTheme {
             fontSize: FontSize.s14,
           ),
           titleSmall: getLightStyle(
-            color: AppColors.grey400,
+            color: AppColors.grey100,
             fontSize: FontSize.s14,
           ),
           bodyLarge: getMediumStyle(
@@ -65,7 +68,7 @@ class AppTheme {
             fontSize: FontSize.s14,
           ),
           bodySmall: getUltraLightStyle(
-            color: AppColors.grey400,
+            color: AppColors.grey100,
             fontSize: FontSize.s13,
           ),
         ),
