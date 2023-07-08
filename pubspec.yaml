@@ -25,9 +25,12 @@ dependencies:
   flutter_svg: ^2.0.7
   image: ^4.0.17
 
-  #localizations
+  # Localizations
   flutter_localizations:
     sdk: flutter
+
+  # Analytics
+  aptabase_flutter: ^0.0.10
 
   # Helper
   intl: ^0.18.0
@@ -37,8 +40,8 @@ dependencies:
   collection: ^1.17.1
   path_provider: ^2.0.15
   loading_indicator: ^3.1.1
-  package_info_plus: ^4.0.2
-  device_info_plus: ^9.0.2
+  package_info_plus: ^3.0.3
+  device_info_plus: ^8.1.0
   dotted_border: ^2.0.0+3
   url_launcher: ^6.1.11
   flex_color_scheme: ^7.1.2
