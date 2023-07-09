@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../components/buttons/elevated_button.dart';
-import '../../components/buttons/icon_button.dart';
 import '../../components/buttons/outlined_button.dart';
 import '../../components/dividers/horizontal_divider.dart';
-import '../../components/icon/icon_view.dart';
-import '../../constants/app/app_icons.dart';
 import '../../constants/extensions/widget/padding_extension.dart';
 import '../../constants/values_manager/font_manager.dart';
 import '../../constants/values_manager/values_manager.dart';
 import '../../helpers/localization/app_local.dart';
+import '../../widgets/auth/o_auth/o_auth_list.dart';
 import 'login_screen.dart';
 import 'register_screen.dart';
 
@@ -83,14 +81,7 @@ class AuthScreen extends StatelessWidget {
                   const Expanded(child: HorizontalDivider()),
                 ],
               ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  AppIconButton(icon: IconView(icon: AppIcons.google)),
-                  AppIconButton(icon: IconView(icon: AppIcons.facebook)),
-                  AppIconButton(icon: IconView(icon: AppIcons.github)),
-                ],
-              ),
+              const OAuthList(),
               const SizedBox(height: AppSize.s18),
             ],
           ),
