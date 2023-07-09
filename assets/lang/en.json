@@ -19,6 +19,7 @@
         "do_not_have_an_account": "Don’t have an account?"
     },
     "error" :{
-        "invalid_email" :"Please enter a valid email"
+        "invalid_email" :"Please enter a valid email",
+        "invalid_password" :"Please enter a valid password"
     }
 }
