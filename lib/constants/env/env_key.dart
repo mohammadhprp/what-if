@@ -8,5 +8,7 @@ class EnvKey {
   static const masterApiBearerToken = 'MASTER_API_BEARER_TOKEN';
   static const masterApiXApiKey = 'MASTER_API_X_API_KEY';
 
+  static const aptabaseKey = 'APTABASE_KEY';
+
   const EnvKey._();
 }

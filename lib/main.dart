@@ -1,3 +1,4 @@
+import 'package:aptabase_flutter/aptabase_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -16,13 +17,17 @@ void main() async {
   await dotenv.load(fileName: ".env");
 
   // initialize Supabase
-  final url = Env.get(EnvKey.supabaseUrl);
-  final key = Env.get(EnvKey.supabaseAnonKey);
+  final supabaseUrl = Env.get(EnvKey.supabaseUrl);
+  final supabaseKey = Env.get(EnvKey.supabaseAnonKey);
 
   await Supabase.initialize(
-    url: url,
-    anonKey: key,
+    url: supabaseUrl,
+    anonKey: supabaseKey,
   );
+
+  // initialize Aptabase
+  final aptabaseKey = Env.get(EnvKey.aptabaseKey);
+  await Aptabase.init(aptabaseKey);
 
   runApp(const ProviderScope(child: App()));
 }
