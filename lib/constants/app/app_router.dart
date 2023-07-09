@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../screens/auth/auth_screen.dart';
 import '../../screens/auth/login_screen.dart';
 import '../../screens/auth/register_screen.dart';
-import '../../screens/home/auth_screen.dart';
+import '../../screens/home/home_screen.dart';
 import '../../screens/splash/splash_screen.dart';
 
 @immutable

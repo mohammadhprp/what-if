@@ -9,7 +9,7 @@ import '../../constants/extensions/widget/padding_extension.dart';
 import '../../constants/values_manager/values_manager.dart';
 import '../../helpers/storage/local_storage.dart';
 import '../auth/auth_screen.dart';
-import '../home/auth_screen.dart';
+import '../home/home_screen.dart';
 
 class SplashScreen extends HookWidget {
   static const routeName = '/splash';
