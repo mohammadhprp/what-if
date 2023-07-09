@@ -4,6 +4,8 @@
     <img src="screenshots/preview.png" width="100%"/>
 </p>
 
+<a href="https://github.com/mohammadhprp/what-if/actions"><img src="https://github.com/mohammadhprp/what-if/workflows/Flutter_Tests/badge.svg" alt="Build Status"></a>
+
 "What If?" is an application that uses AI to create images from text.
 
 ## Features
