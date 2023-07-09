@@ -1,0 +1,27 @@
+name: Flutter_Tests
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+        
+      - name: Install and set Flutter version
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Copy and Rename .env.example
+        run: |
+          cp .env.example .env
+      
+      - name: Restore packages
+        run: flutter pub get
+
+      - name: Run tests
+        run: flutter test
