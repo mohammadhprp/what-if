@@ -28,6 +28,13 @@ class LocalStorage {
     await storage.delete(key: key);
   }
 
+  /// Delete all keys with associated values.
+  static void deleteAll() async {
+    const FlutterSecureStorage storage = FlutterSecureStorage();
+
+    await storage.deleteAll();
+  }
+
   // Check the value exist by the given [key]
   static Future<bool> isExist({required String key}) async {
     const FlutterSecureStorage storage = FlutterSecureStorage();
