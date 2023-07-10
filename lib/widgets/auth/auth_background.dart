@@ -20,7 +20,7 @@ class AuthBackground extends StatelessWidget {
         ),
         color: AppColors.grey08,
       ),
-      child: content,
+      child: SingleChildScrollView(child: content),
     );
   }
 }
