@@ -1,30 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../components/app_logo/app_logo.dart';
 import '../../components/app_version/app_version_view.dart';
-import '../../constants/database/local_storage_name.dart';
 import '../../constants/extensions/media_query/media_query_extension.dart';
 import '../../constants/extensions/widget/padding_extension.dart';
 import '../../constants/values_manager/values_manager.dart';
-import '../../helpers/storage/local_storage.dart';
+import '../../state/providers/auth_providers/is_logged_in_provider.dart';
 import '../auth/auth_screen.dart';
 import '../home/home_screen.dart';
 
-class SplashScreen extends HookWidget {
+class SplashScreen extends HookConsumerWidget {
   static const routeName = '/splash';
   const SplashScreen({super.key});
 
-  Future _authCheck(BuildContext context) async {
-    await LocalStorage.isExist(key: LocalStorageName.token).then(
-      (isAuth) {
-        if (!isAuth) {
-          _push(const AuthScreen(), context);
-        } else {
-          _push(const HomeScreen(), context);
-        }
-      },
-    );
+  Future _authCheck(BuildContext context, WidgetRef ref) async {
+    final isAuth = ref.watch(isLoggedInProvider);
+    if (!isAuth) {
+      _push(const AuthScreen(), context);
+    } else {
+      _push(const HomeScreen(), context);
+    }
   }
 
   void _push(Widget screen, BuildContext context) {
@@ -40,7 +37,7 @@ class SplashScreen extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final isAnimationComplete = useState(false);
 
     final AnimationController animationController = useAnimationController(
@@ -58,7 +55,9 @@ class SplashScreen extends HookWidget {
             animationController.isAnimating || animationController.isCompleted;
       }
 
-      _authCheck(context);
+      Future.delayed(Duration.zero, () {
+        _authCheck(context, ref);
+      });
 
       animationController.addListener(listener);
       return () {
