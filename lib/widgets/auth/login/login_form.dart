@@ -3,6 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../components/buttons/elevated_button.dart';
+import '../../../components/error/error_screen.dart';
+import '../../../components/loading/loading_screen.dart';
 import '../../../components/rich_text/base_text.dart';
 import '../../../components/rich_text/rich_text_widget.dart';
 import '../../../components/text_field/email_text_field.dart';
@@ -11,10 +13,62 @@ import '../../../constants/values_manager/font_manager.dart';
 import '../../../constants/values_manager/values_manager.dart';
 import '../../../helpers/localization/app_local.dart';
 import '../../../screens/auth/register_screen.dart';
+import '../../../screens/home/home_screen.dart';
+import '../../../services/analytics_service.dart';
+import '../../../state/backend/auth/authenticator.dart';
+import '../../../state/providers/auth_providers/auth_state_provider.dart';
 import '../../../utils/validator/value_validator.dart';
 
 class LoginForm extends HookConsumerWidget {
   const LoginForm({super.key});
+
+  Future<void> _login({
+    required BuildContext context,
+    required WidgetRef ref,
+    required String email,
+    required String password,
+  }) async {
+    final provider = ref.read(authStateProvider.notifier);
+
+    // Show loading popup
+    LoadingScreen.instance().show(
+      context: context,
+      text: AppLocal.tr(context, 'app.loading'),
+    );
+
+    // Login user with email and password
+    await provider
+        .signIn(
+      email: email,
+      password: password,
+    )
+        .then((_) {
+      // Track user login
+      AnalyticsService.track(
+        key: 'user',
+        value: {'auth.login': const Authenticator().userId},
+      );
+
+      // Navigate to home screen
+      Navigator.of(context).pushReplacementNamed(
+        HomeScreen.routeName,
+      );
+    }).onError((error, stackTrace) {
+      // Track user failed login
+      AnalyticsService.track(
+        key: 'user',
+        value: {'auth.login.failed': 'Email: $email,password: $password'},
+      );
+      // Show an error popup
+      ErrorScreen.instance().show(
+        context: context,
+        text: AppLocal.tr(context, "$error"),
+      );
+    }).whenComplete(() {
+      // Hide loading popup
+      LoadingScreen.instance().hide();
+    });
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -93,9 +147,12 @@ class LoginForm extends HookConsumerWidget {
           children: [
             AppElevatedButton(
               onPressed: isButtonEnabled.value
-                  ? () {
-                      // TODO: Login user
-                    }
+                  ? () => _login(
+                        context: context,
+                        ref: ref,
+                        email: emailController.text,
+                        password: passwordController.text,
+                      )
                   : null,
               child: Text(
                 AppLocal.tr(context, 'app.login'),
