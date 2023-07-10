@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart' show immutable;
 
-/// For backend database
 @immutable
 class LocalStorageName {
   static const token = 'token';
+  static const userId = 'user_id';
+  static const userName = 'user_name';
+  static const email = 'email';
 
   const LocalStorageName._();
 }
