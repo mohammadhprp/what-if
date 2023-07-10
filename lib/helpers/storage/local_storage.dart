@@ -1,6 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+@immutable
 class LocalStorage {
+  const LocalStorage();
+
   /// Store the [key] with the given [value].
   static void store({required String key, required dynamic value}) async {
     const FlutterSecureStorage storage = FlutterSecureStorage();
