@@ -16,7 +16,9 @@
         "please_enter_your_email_and_password_to_login_in_your_account": "Please enter your email and password to login in your account",
         "forgot_password": "Forgot password?",
         "reset": "Reset",
-        "do_not_have_an_account": "Don’t have an account?"
+        "do_not_have_an_account": "Don’t have an account?",
+        "loading": "Loading..."
+
     },
     "error" :{
         "invalid_email" :"Please enter a valid email",
