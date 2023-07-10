@@ -17,11 +17,15 @@
         "forgot_password": "Forgot password?",
         "reset": "Reset",
         "do_not_have_an_account": "Don’t have an account?",
-        "loading": "Loading..."
+        "loading": "Loading...",
+        "oky": "Oky"
 
     },
     "error" :{
         "invalid_email" :"Please enter a valid email",
-        "invalid_password" :"Please enter a valid password"
+        "invalid_password" :"Please enter a valid password",
+        "an_error_happened": "An error happened",
+        "an_account_with_email_already_exist": "An account with email already exist",
+        "invalid_email_or_password": "Invalid email or password"
     }
 }
