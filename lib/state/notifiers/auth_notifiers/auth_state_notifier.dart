@@ -36,12 +36,16 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
 
     final userId = _authenticator.userId;
     final token = _authenticator.token;
+    final refreshToken = _authenticator.refreshToken;
 
-    if (result == AuthResult.success && userId != null && token != null) {
+    if (result == AuthResult.success &&
+        userId != null &&
+        token != null &&
+        refreshToken != null) {
       await saveUserInfo(
         token: token,
+        refreshToken: refreshToken,
         userId: userId,
-        name: name,
         email: email,
       );
     }
@@ -70,12 +74,16 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
 
     final userId = _authenticator.userId;
     final token = _authenticator.token;
+    final refreshToken = _authenticator.refreshToken;
 
-    if (result == AuthResult.success && userId != null && token != null) {
+    if (result == AuthResult.success &&
+        userId != null &&
+        token != null &&
+        refreshToken != null) {
       await saveUserInfo(
         token: token,
+        refreshToken: refreshToken,
         userId: userId,
-        name: 'name',
         email: email,
       );
     }
@@ -100,13 +108,13 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
 
   Future<void> saveUserInfo({
     required Token token,
+    required Token refreshToken,
     required UserId userId,
-    required String name,
     required String email,
   }) async {
     LocalStorage.store(key: LocalStorageName.token, value: token);
+    LocalStorage.store(key: LocalStorageName.refreshToken, value: refreshToken);
     LocalStorage.store(key: LocalStorageName.userId, value: userId);
-    LocalStorage.store(key: LocalStorageName.userName, value: name);
     LocalStorage.store(key: LocalStorageName.email, value: email);
   }
 }

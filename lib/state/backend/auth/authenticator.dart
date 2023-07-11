@@ -8,6 +8,8 @@ class Authenticator {
   const Authenticator();
 
   Token? get token => Supabase.instance.client.auth.currentSession?.accessToken;
+  Token? get refreshToken =>
+      Supabase.instance.client.auth.currentSession?.refreshToken;
   UserId? get userId => Supabase.instance.client.auth.currentUser?.id;
   String? get email => Supabase.instance.client.auth.currentUser?.email;
 
