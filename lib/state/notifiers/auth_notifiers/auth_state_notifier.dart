@@ -41,7 +41,6 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
       await saveUserInfo(
         token: token,
         userId: userId,
-        name: name,
         email: email,
       );
     }
@@ -75,7 +74,6 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
       await saveUserInfo(
         token: token,
         userId: userId,
-        name: 'name',
         email: email,
       );
     }
@@ -101,12 +99,10 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   Future<void> saveUserInfo({
     required Token token,
     required UserId userId,
-    required String name,
     required String email,
   }) async {
     LocalStorage.store(key: LocalStorageName.token, value: token);
     LocalStorage.store(key: LocalStorageName.userId, value: userId);
-    LocalStorage.store(key: LocalStorageName.userName, value: name);
     LocalStorage.store(key: LocalStorageName.email, value: email);
   }
 }
