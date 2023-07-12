@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:convert';
 
 import 'package:flutter/foundation.dart' show immutable;
 
@@ -32,6 +33,15 @@ class UserProfileModel extends MapView<String, dynamic> {
           image: json[DatabaseColumnName.image],
           createdAt: DateTime.parse(json[DatabaseColumnName.createdAt]),
         );
+
+  String toRawJson() => json.encode(toJson());
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "image": image,
+        "created_at": createdAt.toIso8601String(),
+      };
 
   @override
   bool operator ==(Object other) =>
