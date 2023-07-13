@@ -69,4 +69,9 @@ class UserProfileModel extends MapView<String, dynamic> {
           createdAt,
         ],
       );
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
 }
