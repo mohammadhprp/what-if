@@ -6,6 +6,12 @@
 
 ![example workflow](https://github.com/mohammadhprp/what-if/actions/workflows/test.yml/badge.svg)
 
+
+> **Warning**
+> This is a work-in-progress and not the finished product.
+>
+> Feel free to leave feature suggestions
+
 "What If?" is an application that uses AI to create images from text.
 
 ## Features
