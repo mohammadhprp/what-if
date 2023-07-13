@@ -43,6 +43,13 @@ class UserProfileModel extends MapView<String, dynamic> {
         DatabaseColumnName.createdAt: createdAt.toIso8601String(),
       };
 
+  UserProfileModel copyWith({String? name, String? image}) => UserProfileModel(
+        id: id,
+        name: name ?? this.name,
+        image: image ?? this.image,
+        createdAt: createdAt,
+      );
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
