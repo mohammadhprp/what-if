@@ -56,7 +56,7 @@ class RegisterForm extends HookConsumerWidget {
       // Track user failed register
       AnalyticsService.track(
         key: 'user',
-        value: {'auth.register.failed': 'Email: $email,password: $password'},
+        value: {'auth.register.failed': 'Email: $email => $error'},
       );
 
       // Show an error popup

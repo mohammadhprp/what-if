@@ -6,7 +6,8 @@ class LocalStorage {
   const LocalStorage();
 
   /// Store the [key] with the given [value].
-  static void store({required String key, required dynamic value}) async {
+  static Future<void> store(
+      {required String key, required dynamic value}) async {
     const FlutterSecureStorage storage = FlutterSecureStorage();
 
     await storage.write(key: key, value: "$value");
@@ -22,14 +23,14 @@ class LocalStorage {
   }
 
   /// Delete the [value] with the given [key].
-  static void delete({required String key}) async {
+  static Future<void> delete({required String key}) async {
     const FlutterSecureStorage storage = FlutterSecureStorage();
 
     await storage.delete(key: key);
   }
 
   /// Delete all keys with associated values.
-  static void deleteAll() async {
+  static Future<void> deleteAll() async {
     const FlutterSecureStorage storage = FlutterSecureStorage();
 
     await storage.deleteAll();
