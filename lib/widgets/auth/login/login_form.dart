@@ -57,7 +57,7 @@ class LoginForm extends HookConsumerWidget {
       // Track user failed login
       AnalyticsService.track(
         key: 'user',
-        value: {'auth.login.failed': 'Email: $email,password: $password'},
+        value: {'auth.login.failed': 'Email: $email => $error'},
       );
       // Show an error popup
       ErrorScreen.instance().show(
