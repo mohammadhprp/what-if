@@ -37,10 +37,10 @@ class UserProfileModel extends MapView<String, dynamic> {
   String toRawJson() => json.encode(toJson());
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "image": image,
-        "created_at": createdAt.toIso8601String(),
+        DatabaseColumnName.id: id,
+        DatabaseColumnName.name: name,
+        DatabaseColumnName.image: image,
+        DatabaseColumnName.createdAt: createdAt.toIso8601String(),
       };
 
   @override
