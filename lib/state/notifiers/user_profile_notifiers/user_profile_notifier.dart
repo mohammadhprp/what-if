@@ -109,6 +109,7 @@ class UserProfileNotifier extends StateNotifier<UserProfileModel?> {
     final supabase = Supabase.instance.client;
 
     const query = "${DatabaseColumnName.id}, "
+        "${DatabaseColumnName.userId}, "
         "${DatabaseColumnName.name}, "
         "${DatabaseColumnName.image}, "
         "${DatabaseColumnName.createdAt}";
