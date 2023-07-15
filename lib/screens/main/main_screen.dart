@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../components/icon/icon_view.dart';
 import '../../constants/app/app_icons.dart';
+import '../../constants/extensions/media_query/media_query_extension.dart';
 import '../../constants/extensions/theme/theme_extension.dart';
 import '../../constants/values_manager/values_manager.dart';
 import '../home/home_screen.dart';
@@ -30,7 +31,7 @@ class MainScreen extends HookWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(AppSize.s18),
         child: Container(
-          height: AppSize.s70,
+          height: context.height * 0.1,
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.outlineVariant,
             borderRadius: BorderRadius.circular(AppSize.s20),
