@@ -42,6 +42,6 @@ class Stories extends HookConsumerWidget {
           );
         },
       ),
-    ).padding([Edge.leading], 10);
+    ).padding([Edge.leading], AppPadding.p10);
   }
 }
