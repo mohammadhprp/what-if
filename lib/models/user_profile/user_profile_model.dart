@@ -8,18 +8,21 @@ import '../../constants/database/database_column_name.dart';
 @immutable
 class UserProfileModel extends MapView<String, dynamic> {
   final int id;
+  final String uid;
   final String name;
   final String? image;
   final DateTime createdAt;
 
   UserProfileModel({
     required this.id,
+    required this.uid,
     required this.name,
     required this.image,
     required this.createdAt,
   }) : super(
           {
             DatabaseColumnName.id: id,
+            DatabaseColumnName.userId: uid,
             DatabaseColumnName.name: name,
             DatabaseColumnName.image: image,
             DatabaseColumnName.createdAt: createdAt,
@@ -29,6 +32,7 @@ class UserProfileModel extends MapView<String, dynamic> {
   UserProfileModel.fromJson(Map<String, dynamic> json)
       : this(
           id: json[DatabaseColumnName.id],
+          uid: json[DatabaseColumnName.userId],
           name: json[DatabaseColumnName.name] ?? '',
           image: json[DatabaseColumnName.image],
           createdAt: DateTime.parse(json[DatabaseColumnName.createdAt]),
@@ -38,6 +42,7 @@ class UserProfileModel extends MapView<String, dynamic> {
 
   Map<String, dynamic> toJson() => {
         DatabaseColumnName.id: id,
+        DatabaseColumnName.userId: uid,
         DatabaseColumnName.name: name,
         DatabaseColumnName.image: image,
         DatabaseColumnName.createdAt: createdAt.toIso8601String(),
@@ -45,6 +50,7 @@ class UserProfileModel extends MapView<String, dynamic> {
 
   UserProfileModel copyWith({String? name, String? image}) => UserProfileModel(
         id: id,
+        uid: uid,
         name: name ?? this.name,
         image: image ?? this.image,
         createdAt: createdAt,
@@ -56,6 +62,7 @@ class UserProfileModel extends MapView<String, dynamic> {
       other is UserProfileModel &&
           runtimeType == other.runtimeType &&
           id == other.id &&
+          uid == other.uid &&
           name == other.name &&
           image == other.image &&
           createdAt == other.createdAt;
@@ -64,6 +71,7 @@ class UserProfileModel extends MapView<String, dynamic> {
   int get hashCode => Object.hashAll(
         [
           id,
+          uid,
           name,
           image,
           createdAt,
