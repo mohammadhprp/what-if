@@ -55,7 +55,7 @@ class ImagePickerContent extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        AppLocal.tr(context, 'select_image'),
+                        AppLocal.tr(context, 'app.select_image'),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: 12),
@@ -64,7 +64,7 @@ class ImagePickerContent extends StatelessWidget {
                         child: Text(
                           AppLocal.tr(
                             context,
-                            'select_image_from_camera_or_gallery',
+                            'app.select_image_from_camera_or_gallery',
                           ),
                           style: Theme.of(context).textTheme.titleSmall,
                           textAlign: TextAlign.right,
@@ -94,7 +94,7 @@ class ImagePickerContent extends StatelessWidget {
                             },
                           );
                         },
-                        title: AppLocal.tr(context, 'camera'),
+                        title: AppLocal.tr(context, 'app.camera'),
                         icon: AppIcons.camera,
                       ),
                     ),
@@ -112,7 +112,7 @@ class ImagePickerContent extends StatelessWidget {
                             },
                           );
                         },
-                        title: AppLocal.tr(context, 'gallery'),
+                        title: AppLocal.tr(context, 'app.gallery'),
                         icon: AppIcons.gallery,
                       ),
                     ),
@@ -126,7 +126,7 @@ class ImagePickerContent extends StatelessWidget {
                           margin: const EdgeInsets.only(top: 12),
                           child: CustomIconButton(
                             onTap: onDelete,
-                            title: AppLocal.tr(context, 'delete_image'),
+                            title: AppLocal.tr(context, 'app.delete_image'),
                             icon: AppIcons.trash,
                             textColor: Theme.of(context).colorScheme.error,
                             iconColor: Theme.of(context).colorScheme.error,
