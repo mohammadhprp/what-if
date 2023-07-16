@@ -4,36 +4,33 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart' show immutable;
 
 import '../../constants/database/database_column_name.dart';
+import '../user_profile/user_profile_model.dart';
 
 @immutable
-class UserProfileModel extends MapView<String, dynamic> {
+class StoryModel extends MapView<String, dynamic> {
   final int id;
-  final String uid;
-  final String name;
-  final String? image;
+  final UserProfileModel user;
+  final String image;
   final DateTime createdAt;
 
-  UserProfileModel({
+  StoryModel({
     required this.id,
-    required this.uid,
-    required this.name,
+    required this.user,
     required this.image,
     required this.createdAt,
   }) : super(
           {
             DatabaseColumnName.id: id,
-            DatabaseColumnName.userId: uid,
-            DatabaseColumnName.name: name,
+            DatabaseColumnName.user: user,
             DatabaseColumnName.image: image,
             DatabaseColumnName.createdAt: createdAt,
           },
         );
 
-  UserProfileModel.fromJson(Map<String, dynamic> json)
+  StoryModel.fromJson(Map<String, dynamic> json)
       : this(
           id: json[DatabaseColumnName.id],
-          uid: json[DatabaseColumnName.userId],
-          name: json[DatabaseColumnName.name] ?? '',
+          user: UserProfileModel.fromJson(json[DatabaseColumnName.user]),
           image: json[DatabaseColumnName.image],
           createdAt: DateTime.parse(json[DatabaseColumnName.createdAt]),
         );
@@ -42,16 +39,14 @@ class UserProfileModel extends MapView<String, dynamic> {
 
   Map<String, dynamic> toJson() => {
         DatabaseColumnName.id: id,
-        DatabaseColumnName.userId: uid,
-        DatabaseColumnName.name: name,
+        DatabaseColumnName.user: user.toJson(),
         DatabaseColumnName.image: image,
         DatabaseColumnName.createdAt: createdAt.toIso8601String(),
       };
 
-  UserProfileModel copyWith({String? name, String? image}) => UserProfileModel(
+  StoryModel copyWith({String? caption, String? image}) => StoryModel(
         id: id,
-        uid: uid,
-        name: name ?? this.name,
+        user: user,
         image: image ?? this.image,
         createdAt: createdAt,
       );
@@ -59,11 +54,10 @@ class UserProfileModel extends MapView<String, dynamic> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserProfileModel &&
+      other is StoryModel &&
           runtimeType == other.runtimeType &&
           id == other.id &&
-          uid == other.uid &&
-          name == other.name &&
+          user == other.user &&
           image == other.image &&
           createdAt == other.createdAt;
 
@@ -71,8 +65,7 @@ class UserProfileModel extends MapView<String, dynamic> {
   int get hashCode => Object.hashAll(
         [
           id,
-          uid,
-          name,
+          user,
           image,
           createdAt,
         ],

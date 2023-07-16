@@ -9,7 +9,7 @@ import '../../constants/extensions/widget/padding_extension.dart';
 import '../../constants/values_manager/values_manager.dart';
 import '../../state/providers/auth_providers/is_logged_in_provider.dart';
 import '../auth/auth_screen.dart';
-import '../home/home_screen.dart';
+import '../main/main_screen.dart';
 
 class SplashScreen extends HookConsumerWidget {
   static const routeName = '/splash';
@@ -20,7 +20,7 @@ class SplashScreen extends HookConsumerWidget {
     if (!isAuth) {
       _push(const AuthScreen(), context);
     } else {
-      _push(const HomeScreen(), context);
+      _push(const MainScreen(), context);
     }
   }
 
