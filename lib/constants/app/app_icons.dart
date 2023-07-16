@@ -9,6 +9,7 @@ class AppIcons {
   static const github = '$_path/github-logo.svg';
 
   static const add = '$_path/add.svg';
+  static const addSquare = '$_path/add-square.svg';
   static const arrowDown = '$_path/arrow-down.svg';
   static const arrowLeft = '$_path/arrow-left.svg';
   static const arrowRight = '$_path/arrow-right.svg';
