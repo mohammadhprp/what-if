@@ -63,12 +63,12 @@ class MainScreen extends HookWidget {
                 ),
                 BottomNavigationBarItem(
                   icon: IconView(
-                    icon: AppIcons.add,
+                    icon: AppIcons.addSquare,
                     color: unselectedIcon,
                     height: AppSize.s30,
                   ),
                   activeIcon: IconView(
-                    icon: AppIcons.add,
+                    icon: AppIcons.addSquare,
                     color: selectedIcon,
                     height: AppSize.s30,
                   ),
