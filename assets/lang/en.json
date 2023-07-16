@@ -18,7 +18,17 @@
         "reset": "Reset",
         "do_not_have_an_account": "Don’t have an account?",
         "loading": "Loading...",
-        "oky": "Oky"
+        "oky": "Oky",
+        "update":"Update",
+        "update_user_profile": "Update profile",
+        "edit_profile": "Edit profile",
+        "share_profile": "Share profile",
+        "timeline": "Your Timeline",
+        "select_image": "Select your image",
+        "select_image_from_camera_or_gallery": "Select Image from camera or gallery",
+        "camera": "Camera",
+        "gallery": "Gallery",
+        "delete_image": "Delete image"
 
     },
     "error" :{
