@@ -30,9 +30,9 @@ class ImageGenerateProcess {
 class ResponseData {
   String processId;
   String status;
-  Result result;
-  int creditUsed;
-  int overage;
+  Result? result;
+  int? creditUsed;
+  int? overage;
 
   ResponseData({
     required this.processId,
@@ -45,7 +45,11 @@ class ResponseData {
   factory ResponseData.fromJson(Map<String, dynamic> json) => ResponseData(
         processId: json["process_id"],
         status: json["status"],
-        result: Result.fromJson(json["result"]),
+        result: json["result"] != null &&
+                json["result"] is Map &&
+                (json["result"] as Map).isNotEmpty
+            ? Result?.fromJson(json["result"])
+            : null,
         creditUsed: json["credit_used"],
         overage: json["overage"],
       );
@@ -53,7 +57,7 @@ class ResponseData {
   Map<String, dynamic> toJson() => {
         "process_id": processId,
         "status": status,
-        "result": result.toJson(),
+        "result": result?.toJson(),
         "credit_used": creditUsed,
         "overage": overage,
       };
