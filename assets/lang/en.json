@@ -6,11 +6,13 @@
         "update_user_profile": "Update profile",
         "edit_profile": "Edit profile",
         "share_profile": "Share profile",
+        "profile": "Profile",
         "select_image": "Select your image",
         "select_image_from_camera_or_gallery": "Select Image from camera or gallery",
         "camera": "Camera",
         "gallery": "Gallery",
-        "delete_image": "Delete image"
+        "delete_image": "Delete image",
+        "add_post": "Add Post"
     },
     "auth": {
         "welcome_to_what_if": "Welcome to What If ?",
