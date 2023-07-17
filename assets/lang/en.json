@@ -1,41 +1,66 @@
 {
     "app": {
         "what_if": "What If ?",
-        "welcome_to_what_if": "Welcome to What If ?",
-        "unlock_a_world_of_imagination_and_explore_limitless_possibilities": "Unlock a World of Imagination and Explore Limitless Possibilities",
-        "register": "Register",
-        "login": "Login",
-        "or": "or",
-        "create_new_account": "Create new account",
-        "please_enter_info_to_create_account": "Please enter info to create account",
-        "enter_your_name": "Enter your name",
-        "enter_your_email": "Enter your email",
-        "enter_your_password": "Enter your password",
-        "already_have_an_account": "Already have an account?",
-        "welcome_back": "Welcome back",
-        "please_enter_your_email_and_password_to_login_in_your_account": "Please enter your email and password to login in your account",
-        "forgot_password": "Forgot password?",
-        "reset": "Reset",
-        "do_not_have_an_account": "Don’t have an account?",
         "loading": "Loading...",
-        "oky": "Oky",
-        "update":"Update",
+        "timeline": "Your Timeline",
         "update_user_profile": "Update profile",
         "edit_profile": "Edit profile",
         "share_profile": "Share profile",
-        "timeline": "Your Timeline",
         "select_image": "Select your image",
         "select_image_from_camera_or_gallery": "Select Image from camera or gallery",
         "camera": "Camera",
         "gallery": "Gallery",
         "delete_image": "Delete image"
-
     },
-    "error" :{
-        "invalid_email" :"Please enter a valid email",
-        "invalid_password" :"Please enter a valid password",
+    "auth": {
+        "welcome_to_what_if": "Welcome to What If ?",
+        "unlock_a_world_of_imagination_and_explore_limitless_possibilities": "Unlock a World of Imagination and Explore Limitless Possibilities",
+        "or": "or",
+        "create_new_account": "Create new account",
+        "please_enter_info_to_create_account": "Please enter info to create account",
+        "already_have_an_account": "Already have an account?",
+        "welcome_back": "Welcome back",
+        "please_enter_your_email_and_password_to_login_in_your_account": "Please enter your email and password to login in your account",
+        "forgot_password": "Forgot password?",
+        "reset": "Reset",
+        "do_not_have_an_account": "Don’t have an account?"
+    },
+    "form": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "message": "Message",
+        "enter_your_name": "Enter your name",
+        "enter_your_email": "Enter your email",
+        "enter_your_password": "Enter your password"
+    },
+    "button": {
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "close": "Close",
+        "update": "Update",
+        "ok": "Ok",
+        "register": "Register",
+        "login": "Login"
+    },
+    "success": {
+        "saved": "Saved successfully.",
+        "updated": "Updated successfully.",
+        "deleted": "Deleted successfully."
+    },
+    "error": {
+        "invalid_email": "Please enter a valid email",
+        "invalid_password": "Please enter a valid password",
         "an_error_happened": "An error happened",
         "an_account_with_email_already_exist": "An account with email already exist",
-        "invalid_email_or_password": "Invalid email or password"
+        "invalid_email_or_password": "Invalid email or password",
+        "required": "This field is required.",
+        "password_mismatch": "Passwords do not match.",
+        "min_length": "Minimum length is {length}.",
+        "max_length": "Maximum length is {length}."
+    },
+    "validation": {
+        "email": "Please enter a valid email address.",
+        "password": "Password must contain at least {length} characters."
     }
 }

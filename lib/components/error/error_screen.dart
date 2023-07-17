@@ -104,7 +104,7 @@ class ErrorScreen {
                         onPressed: () {
                           hide();
                         },
-                        child: Text(AppLocal.tr(context, 'app.oky')),
+                        child: Text(AppLocal.tr(context, 'button.ok')),
                       )
                     ],
                   ),

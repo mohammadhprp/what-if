@@ -33,7 +33,7 @@ class LoginForm extends HookConsumerWidget {
     // Show loading popup
     LoadingScreen.instance().show(
       context: context,
-      text: AppLocal.tr(context, 'app.loading'),
+      text: AppLocal.tr(context, 'auth.loading'),
     );
 
     // Login user with email and password
@@ -111,7 +111,7 @@ class LoginForm extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppLocal.tr(context, 'app.welcome_back'),
+                AppLocal.tr(context, 'auth.welcome_back'),
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                       fontSize: FontSize.s30,
                     ),
@@ -119,7 +119,7 @@ class LoginForm extends HookConsumerWidget {
               Text(
                 AppLocal.tr(
                   context,
-                  'app.please_enter_your_email_and_password_to_login_in_your_account',
+                  'auth.please_enter_your_email_and_password_to_login_in_your_account',
                 ),
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontSize: FontSize.s20,
@@ -132,12 +132,12 @@ class LoginForm extends HookConsumerWidget {
         Column(
           children: [
             EmailTextField(
-              hint: AppLocal.tr(context, 'app.enter_your_email'),
+              hint: AppLocal.tr(context, 'form.enter_your_email'),
               controller: emailController,
             ),
             const SizedBox(height: AppSize.s18),
             PasswordTextField(
-              hint: AppLocal.tr(context, 'app.enter_your_password'),
+              hint: AppLocal.tr(context, 'form.enter_your_password'),
               controller: passwordController,
             ),
           ],
@@ -155,7 +155,7 @@ class LoginForm extends HookConsumerWidget {
                       )
                   : null,
               child: Text(
-                AppLocal.tr(context, 'app.login'),
+                AppLocal.tr(context, 'button.login'),
               ),
             ),
             const SizedBox(height: AppSize.s20),
@@ -163,10 +163,10 @@ class LoginForm extends HookConsumerWidget {
               styleForAll: Theme.of(context).textTheme.titleMedium,
               texts: [
                 BaseText.plain(
-                  text: AppLocal.tr(context, 'app.do_not_have_an_account'),
+                  text: AppLocal.tr(context, 'auth.do_not_have_an_account'),
                 ),
                 BaseText.link(
-                  text: AppLocal.tr(context, 'app.register'),
+                  text: AppLocal.tr(context, 'button.register'),
                   onTapped: () {
                     Navigator.of(context).popAndPushNamed(
                       RegisterScreen.routeName,
