@@ -19,6 +19,7 @@ class AppIcons {
   static const camera = '$_path/camera.svg';
   static const clock = '$_path/clock.svg';
   static const closeCircle = '$_path/close-circle.svg';
+  static const download = '$_path/download.svg';
   static const edit = '$_path/edit.svg';
   static const eye = '$_path/eye.svg';
   static const eyeSlash = '$_path/eye-slash.svg';
@@ -35,7 +36,7 @@ class AppIcons {
   static const moneys = '$_path/moneys.svg';
   static const note = '$_path/note.svg';
   static const profile = '$_path/profile.svg';
-  static const receiptItem = '$_path/receipt-item.svg';
+  static const refresh = '$_path/refresh.svg';
   static const scanBarcode = '$_path/scan-barcode.svg';
   static const search = '$_path/search.svg';
   static const settings = '$_path/setting.svg';
