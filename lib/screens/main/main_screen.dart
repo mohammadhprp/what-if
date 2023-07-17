@@ -6,7 +6,9 @@ import '../../constants/app/app_icons.dart';
 import '../../constants/extensions/media_query/media_query_extension.dart';
 import '../../constants/extensions/theme/theme_extension.dart';
 import '../../constants/values_manager/values_manager.dart';
+import '../../helpers/localization/app_local.dart';
 import '../home/home_screen.dart';
+import '../post/generate_image_screen.dart';
 import '../user_profile/user_profile_screen.dart';
 
 class MainScreen extends HookWidget {
@@ -19,7 +21,7 @@ class MainScreen extends HookWidget {
 
     final tabs = [
       const HomeScreen(),
-      const HomeScreen(),
+      const GenerateImageScreen(),
       const UserProfileScreen(),
     ];
 
@@ -59,7 +61,7 @@ class MainScreen extends HookWidget {
                     icon: AppIcons.house,
                     color: selectedIcon,
                   ),
-                  label: "Timeline",
+                  label: AppLocal.tr(context, 'timeline'),
                 ),
                 BottomNavigationBarItem(
                   icon: IconView(
@@ -72,7 +74,7 @@ class MainScreen extends HookWidget {
                     color: selectedIcon,
                     height: AppSize.s30,
                   ),
-                  label: "Add Post",
+                  label: AppLocal.tr(context, 'add_post'),
                 ),
                 BottomNavigationBarItem(
                   icon: IconView(
@@ -83,7 +85,7 @@ class MainScreen extends HookWidget {
                     icon: AppIcons.user,
                     color: selectedIcon,
                   ),
-                  label: "Profile",
+                  label: AppLocal.tr(context, 'profile'),
                 ),
               ],
             ),
