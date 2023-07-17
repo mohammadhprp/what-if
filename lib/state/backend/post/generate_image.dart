@@ -30,9 +30,9 @@ class GenerateImage {
 
       // Wait for result
       final process = await _status(task.processId);
-      final outputsUrl = process.responseData.result.output;
+      final outputsUrl = process.responseData.result?.output;
 
-      if (outputsUrl.isEmpty) {
+      if (outputsUrl == null || outputsUrl.isEmpty) {
         throw MessageException('error.generate_image_filed');
       }
 
@@ -120,6 +120,8 @@ class GenerateImage {
       return process;
     } else {
       // Call the API again
+      // Wait for a certain duration before checking the API status again
+      await Future.delayed(const Duration(seconds: 3));
       return _status(processId);
     }
   }
