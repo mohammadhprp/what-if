@@ -27,8 +27,8 @@ class HttpService {
       BaseOptions(
         baseUrl: url,
         headers: _headers,
-        connectTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 8),
+        connectTimeout: const Duration(seconds: 20),
+        receiveTimeout: const Duration(seconds: 20),
         receiveDataWhenStatusError: true,
         followRedirects: true,
       ),
