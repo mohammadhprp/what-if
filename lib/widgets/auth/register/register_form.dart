@@ -35,7 +35,7 @@ class RegisterForm extends HookConsumerWidget {
     // Show loading popup
     LoadingScreen.instance().show(
       context: context,
-      text: AppLocal.tr(context, 'app.loading'),
+      text: AppLocal.tr(context, 'auth.loading'),
     );
 
     // Register user with email and password
@@ -116,13 +116,14 @@ class RegisterForm extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppLocal.tr(context, 'app.create_new_account'),
+                AppLocal.tr(context, 'auth.create_new_account'),
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                       fontSize: FontSize.s30,
                     ),
               ),
               Text(
-                AppLocal.tr(context, 'app.please_enter_info_to_create_account'),
+                AppLocal.tr(
+                    context, 'auth.please_enter_info_to_create_account'),
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontSize: FontSize.s20,
                     ),
@@ -134,17 +135,17 @@ class RegisterForm extends HookConsumerWidget {
         Column(
           children: [
             ContextTextField(
-              hint: AppLocal.tr(context, 'app.enter_your_name'),
+              hint: AppLocal.tr(context, 'form.enter_your_name'),
               controller: nameController,
             ),
             const SizedBox(height: AppSize.s18),
             EmailTextField(
-              hint: AppLocal.tr(context, 'app.enter_your_email'),
+              hint: AppLocal.tr(context, 'form.enter_your_email'),
               controller: emailController,
             ),
             const SizedBox(height: AppSize.s18),
             PasswordTextField(
-              hint: AppLocal.tr(context, 'app.enter_your_password'),
+              hint: AppLocal.tr(context, 'form.enter_your_password'),
               controller: passwordController,
             ),
           ],
@@ -163,7 +164,7 @@ class RegisterForm extends HookConsumerWidget {
                       )
                   : null,
               child: Text(
-                AppLocal.tr(context, 'app.register'),
+                AppLocal.tr(context, 'button.register'),
               ),
             ),
             const SizedBox(height: AppSize.s20),
@@ -171,10 +172,10 @@ class RegisterForm extends HookConsumerWidget {
               styleForAll: Theme.of(context).textTheme.titleMedium,
               texts: [
                 BaseText.plain(
-                  text: AppLocal.tr(context, 'app.already_have_an_account'),
+                  text: AppLocal.tr(context, 'auth.already_have_an_account'),
                 ),
                 BaseText.link(
-                  text: AppLocal.tr(context, 'app.login'),
+                  text: AppLocal.tr(context, 'button.login'),
                   onTapped: () {
                     Navigator.of(context).popAndPushNamed(
                       LoginScreen.routeName,

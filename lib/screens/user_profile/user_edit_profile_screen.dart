@@ -128,7 +128,7 @@ class UserEditProfileScreen extends HookConsumerWidget {
               ),
               const SizedBox(height: AppSize.s28),
               ContextTextField(
-                hint: AppLocal.tr(context, 'app.enter_your_name'),
+                hint: AppLocal.tr(context, 'form.enter_your_name'),
                 controller: nameController,
               ),
             ],
@@ -143,7 +143,7 @@ class UserEditProfileScreen extends HookConsumerWidget {
                     )
                 : null,
             child: Text(
-              AppLocal.tr(context, 'app.update'),
+              AppLocal.tr(context, 'button.update'),
             ),
           ),
         ],
