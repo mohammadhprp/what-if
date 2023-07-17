@@ -14,6 +14,7 @@ class ImageFileView extends StatelessWidget {
   final double? radius;
   final BoxFit? fit;
   final Border? border;
+  final BoxShape? shape;
 
   const ImageFileView({
     super.key,
@@ -24,6 +25,7 @@ class ImageFileView extends StatelessWidget {
     this.radius,
     this.fit,
     this.border,
+    this.shape,
   });
 
   @override
@@ -35,6 +37,7 @@ class ImageFileView extends StatelessWidget {
         radius: radius,
         fit: fit,
         border: border,
+        shape: shape,
       );
     }
     return FutureBuilder(
@@ -47,6 +50,7 @@ class ImageFileView extends StatelessWidget {
             radius: radius,
             fit: fit,
             border: border,
+            shape: shape,
           );
         }
 
@@ -58,6 +62,7 @@ class ImageFileView extends StatelessWidget {
           radius: radius,
           fit: fit,
           border: border,
+          shape: shape,
         );
       },
     );
@@ -70,6 +75,7 @@ class ImageFilePalaceHolder extends StatelessWidget {
   final double? radius;
   final BoxFit? fit;
   final Border? border;
+  final BoxShape? shape;
   const ImageFilePalaceHolder({
     super.key,
     this.height,
@@ -77,6 +83,7 @@ class ImageFilePalaceHolder extends StatelessWidget {
     this.radius,
     this.fit,
     this.border,
+    this.shape,
   });
 
   @override
@@ -85,7 +92,7 @@ class ImageFilePalaceHolder extends StatelessWidget {
       width: width ?? context.width * 0.4,
       height: height ?? context.height * 0.2,
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
+        shape: shape ?? BoxShape.circle,
         border: border,
         image: const DecorationImage(
           image: AssetImage(AppAssets.logo),
@@ -103,6 +110,7 @@ class ImageFileViewer extends StatelessWidget {
   final double? radius;
   final BoxFit? fit;
   final Border? border;
+  final BoxShape? shape;
   const ImageFileViewer({
     super.key,
     required this.image,
@@ -111,6 +119,7 @@ class ImageFileViewer extends StatelessWidget {
     this.radius,
     this.fit,
     this.border,
+    this.shape,
   });
 
   @override
@@ -119,7 +128,7 @@ class ImageFileViewer extends StatelessWidget {
       width: width ?? context.width * 0.4,
       height: height ?? context.height * 0.2,
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
+        shape: shape ?? BoxShape.circle,
         border: border,
         image: DecorationImage(
           image: FileImage(image),
