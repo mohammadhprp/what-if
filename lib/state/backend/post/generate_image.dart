@@ -33,13 +33,13 @@ class GenerateImage {
       final outputsUrl = process.responseData.result?.output;
 
       if (outputsUrl == null || outputsUrl.isEmpty) {
-        throw MessageException('error.generate_image_filed');
+        throw MessageException('error.generate_image_failed');
       }
 
       // Download and store first output
       return _download(outputsUrl.first);
     } on Exception {
-      throw MessageException('error.generate_image_filed');
+      throw MessageException('error.generate_image_failed');
     } finally {
       _isLoading = false;
     }
@@ -90,7 +90,7 @@ class GenerateImage {
     );
 
     if (response.statusCode != 200) {
-      throw MessageException('error.generate_image_filed');
+      throw MessageException('error.generate_image_failed');
     }
 
     return ImageGenerateTask.fromJson(response.data);
@@ -110,7 +110,7 @@ class GenerateImage {
     );
 
     if (response.statusCode != 200) {
-      throw MessageException('error.filed_to_get_generate_image_status');
+      throw MessageException('error.failed_to_get_generate_image_status');
     }
 
     final process = ImageGenerateProcess.fromJson(response.data);
