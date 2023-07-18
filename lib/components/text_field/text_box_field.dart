@@ -7,6 +7,7 @@ class TextBoxField extends StatelessWidget {
   final int minLine;
   final TextInputAction? action;
   final TextInputType? type;
+  final Function(String)? onFiledSubmitted;
 
   const TextBoxField({
     Key? key,
@@ -16,6 +17,7 @@ class TextBoxField extends StatelessWidget {
     this.minLine = 3,
     this.action = TextInputAction.done,
     this.type = TextInputType.text,
+    required this.onFiledSubmitted,
   }) : super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class TextBoxField extends StatelessWidget {
         hintText: hint,
         labelText: label,
       ),
+      onFieldSubmitted: onFiledSubmitted,
     );
   }
 }

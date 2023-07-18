@@ -38,7 +38,7 @@ class UserProfileNotifier extends StateNotifier<UserProfileModel?> {
       state = profile;
       return profile;
     } catch (e) {
-      throw MessageException('error.filed_to_get_user_profile');
+      throw MessageException('error.failed_to_get_user_profile');
     }
   }
 
@@ -99,7 +99,7 @@ class UserProfileNotifier extends StateNotifier<UserProfileModel?> {
       state = profile;
     } catch (e) {
       e.eLog();
-      throw MessageException('error.filed_to_update_user_profile');
+      throw MessageException('error.failed_to_update_user_profile');
     }
   }
 
