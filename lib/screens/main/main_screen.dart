@@ -8,7 +8,7 @@ import '../../constants/extensions/theme/theme_extension.dart';
 import '../../constants/values_manager/values_manager.dart';
 import '../../helpers/localization/app_local.dart';
 import '../home/home_screen.dart';
-import '../post/generate_image_screen.dart';
+import '../post/create_post_screen.dart';
 import '../user_profile/user_profile_screen.dart';
 
 class MainScreen extends HookWidget {
@@ -21,7 +21,7 @@ class MainScreen extends HookWidget {
 
     final tabs = [
       const HomeScreen(),
-      const GenerateImageScreen(),
+      const CreatePostScreen(),
       const UserProfileScreen(),
     ];
 
