@@ -14,11 +14,25 @@ class GenerateImageForm extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useTextEditingController();
 
+    final textFieldHaveIsNotEmpty = useState(false);
+
+    useEffect(() {
+      void listener() {
+        textFieldHaveIsNotEmpty.value = controller.text.isNotEmpty;
+      }
+
+      controller.addListener(listener);
+
+      return () {
+        controller.removeListener(listener);
+      };
+    }, [controller]);
+
     return PromptBoxField(
       controller: controller,
       hint: AppLocal.tr(context, 'app.what_if'),
       minLine: 2,
-      onFiledSubmitted: controller.text.isNotEmpty
+      onFiledSubmitted: textFieldHaveIsNotEmpty.value
           ? (value) async {
               // Send a request to generate image from prompt
               final provider = ref.read(generateImageProvider.notifier);

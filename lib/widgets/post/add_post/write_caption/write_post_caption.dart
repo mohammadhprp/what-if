@@ -13,8 +13,21 @@ class WritePostCaption extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller =
-        useTextEditingController(text: 'Look how this cat is cute');
+    final controller = useTextEditingController();
+
+    final textFieldHaveIsNotEmpty = useState(false);
+
+    useEffect(() {
+      void listener() {
+        textFieldHaveIsNotEmpty.value = controller.text.isNotEmpty;
+      }
+
+      controller.addListener(listener);
+
+      return () {
+        controller.removeListener(listener);
+      };
+    }, [controller]);
 
     return Column(
       children: [
@@ -22,7 +35,7 @@ class WritePostCaption extends HookConsumerWidget {
           controller: controller,
           hint: AppLocal.tr(context, 'form.message'),
           minLine: 4,
-          onFiledSubmitted: controller.text.isNotEmpty
+          onFiledSubmitted: textFieldHaveIsNotEmpty.value
               ? (value) {
                   // Update createPost state to next step
                   final state = ref.read(createPostStateProvider.notifier);
