@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../constants/config/monsterapi_config.dart';
 import '../../../constants/env/env.dart';
 import '../../../constants/env/env_key.dart';
-import '../../../constants/typedefs.dart';
+import '../../../constants/urls/api_url.dart';
 import '../../../models/post/image_generate_process.dart';
 import '../../../models/post/image_generate_task.dart';
 import '../../../services/http_service.dart';
@@ -14,14 +15,8 @@ import '../../../utils/exceptions/message_exception.dart';
 class GenerateImage {
   HttpService client = HttpService();
 
-  IsLoading _isLoading = false;
-
-  IsLoading get isLoading => _isLoading;
-
   Future<File> request({required String prompt}) async {
     try {
-      _isLoading = true;
-
       // initialize Image generator API
       await _init();
 
@@ -40,8 +35,6 @@ class GenerateImage {
       return _download(outputsUrl.first);
     } on Exception {
       throw MessageException('error.generate_image_failed');
-    } finally {
-      _isLoading = false;
     }
   }
 
@@ -51,42 +44,34 @@ class GenerateImage {
     final masterApiBearerToken = Env.get(EnvKey.masterApiBearerToken);
 
     final Map<String, String> header = {
-      "x-api-key": masterApiXApiKey,
-      "Authorization": masterApiBearerToken,
+      MonsterapiConfig.xApiKey: masterApiXApiKey,
+      MonsterapiConfig.authorization: masterApiBearerToken,
     };
 
     // initialize HTTP service
-    await client.init('https://api.monsterapi.ai/apis', header);
+    await client.init(ApiUrl.monsterapi, header);
   }
 
-  Future<ImageGenerateTask> _generate(String text) async {
+  Future<ImageGenerateTask> _generate(String prompt) async {
     Response response;
 
-    final Map<String, dynamic> prompt = {
-      "model": "txt2img",
+    final Map<String, dynamic> date = {
+      "model": MonsterapiConfig.model,
       "data": {
-        "prompt": text,
-        "negprompt": "lowers, signs, memes, labels, text, food, text,"
-            " error, mutant, cropped, worst quality, low quality, "
-            "normal quality, jpeg artifacts, signature, watermark, "
-            "username, blurry, made by children, caricature, ugly, "
-            "boring, sketch, lackluster, repetitive, cropped, "
-            "(long neck), facebook, youtube, body horror, out of frame,"
-            " mutilated, tiled, frame, border, porcelain skin, doll like,"
-            " doll, bad quality, cartoon, lowers, meme, low quality, worst "
-            "quality, ugly, disfigured, inhuman",
-        "samples": 1,
-        "steps": 50,
-        "aspect_ratio": "square",
-        "guidance_scale": 12.5,
-        "seed": 2321
+        "prompt": "$prompt, 8k, high quality",
+        "negprompt": MonsterapiConfig.negativePrompt,
+        "samples": MonsterapiConfig.samples,
+        "steps": MonsterapiConfig.steps,
+        "aspect_ratio": MonsterapiConfig.guidanceScale,
+        "guidance_scale": MonsterapiConfig.guidanceScale,
+        "seed": MonsterapiConfig.seed,
       }
     };
 
     response = await client.request(
       url: "/add-task",
       method: Method.POST,
-      params: prompt,
+      params: date,
     );
 
     if (response.statusCode != 200) {
@@ -121,7 +106,7 @@ class GenerateImage {
     } else {
       // Call the API again
       // Wait for a certain duration before checking the API status again
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 5));
       return _status(processId);
     }
   }
