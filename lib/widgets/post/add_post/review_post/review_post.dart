@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../components/buttons/elevated_button.dart';
+import '../../../../components/images/image_file_view.dart';
+import '../../../../constants/extensions/media_query/media_query_extension.dart';
+import '../../../../constants/extensions/theme/theme_extension.dart';
+import '../../../../constants/values_manager/values_manager.dart';
+import '../../../../helpers/localization/app_local.dart';
+import '../../../../state/providers/post_providers/create_post_provider.dart';
+
+class ReviewPost extends ConsumerWidget {
+  const ReviewPost({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.read(createPostProvider);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: ImageFileViewer(
+            // height: context.height,
+            width: context.width,
+            image: provider!.image!,
+            shape: BoxShape.rectangle,
+            fit: BoxFit.cover,
+          ),
+        ),
+        const SizedBox(height: AppSize.s24),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              AppLocal.tr(context, 'app.prompt'),
+              style: context.textTheme.titleMedium,
+            ),
+            Text(
+              provider.prompt ?? '',
+              style: context.textTheme.displayMedium,
+            ),
+          ],
+        ),
+        const SizedBox(height: AppSize.s16),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              AppLocal.tr(context, 'app.caption'),
+              style: context.textTheme.titleMedium,
+            ),
+            Text(
+              provider.caption ?? '',
+              style: context.textTheme.displayMedium,
+            ),
+          ],
+        ),
+        const SizedBox(height: AppSize.s24),
+        AppElevatedButton(
+          onPressed: () {},
+          child: Text(AppLocal.tr(context, 'button.post')),
+        )
+      ],
+    );
+  }
+}
