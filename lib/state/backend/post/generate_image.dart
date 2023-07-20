@@ -56,13 +56,13 @@ class GenerateImage {
     Response response;
 
     final Map<String, dynamic> date = {
-      "model": MonsterapiConfig.model,
+      "model": MonsterapiConfig.model.name,
       "data": {
         "prompt": "$prompt, 8k, high quality",
         "negprompt": MonsterapiConfig.negativePrompt,
         "samples": MonsterapiConfig.samples,
         "steps": MonsterapiConfig.steps,
-        "aspect_ratio": MonsterapiConfig.guidanceScale,
+        "aspect_ratio": MonsterapiConfig.aspectRatio.name,
         "guidance_scale": MonsterapiConfig.guidanceScale,
         "seed": MonsterapiConfig.seed,
       }

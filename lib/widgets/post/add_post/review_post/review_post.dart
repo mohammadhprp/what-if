@@ -3,11 +3,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../components/buttons/elevated_button.dart';
 import '../../../../components/images/image_file_view.dart';
+import '../../../../components/loading/loading_screen.dart';
+import '../../../../constants/enums/create_post_state.dart';
 import '../../../../constants/extensions/media_query/media_query_extension.dart';
 import '../../../../constants/extensions/theme/theme_extension.dart';
 import '../../../../constants/values_manager/values_manager.dart';
 import '../../../../helpers/localization/app_local.dart';
 import '../../../../state/providers/post_providers/create_post_provider.dart';
+import '../../../../state/providers/post_providers/create_post_state_provider.dart';
 
 class ReviewPost extends ConsumerWidget {
   const ReviewPost({super.key});
@@ -58,7 +61,22 @@ class ReviewPost extends ConsumerWidget {
         ),
         const SizedBox(height: AppSize.s24),
         AppElevatedButton(
-          onPressed: () {},
+          onPressed: () async {
+            // Show loading popup
+            LoadingScreen.instance().show(
+              context: context,
+              text: AppLocal.tr(context, 'app.loading'),
+            );
+
+            // await ref.read(addPostProvider).store(provider);
+
+            // Hide loading popup
+            LoadingScreen.instance().hide();
+
+            // Update createPost state to next step
+            final state = ref.read(createPostStateProvider.notifier);
+            state.update(CreatePostState.upload);
+          },
           child: Text(AppLocal.tr(context, 'button.post')),
         )
       ],
