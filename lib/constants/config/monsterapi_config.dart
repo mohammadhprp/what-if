@@ -2,7 +2,7 @@ class MonsterapiConfig {
   static const xApiKey = "x-api-key";
   static const authorization = "Authorization";
 
-  static const model = Model.img2img;
+  static const model = Model.txt2img;
 
   static const negativePrompt =
       "lowers, signs, memes, labels, text, food, text,"
@@ -24,7 +24,7 @@ class MonsterapiConfig {
   /// Allowed values: square, landscape, portrait
   static const aspectRatio = AspectRatio.landscape;
 
-  static const guidanceScale = 15;
+  static const guidanceScale = 12.5;
 
   static const seed = 2333;
 }
