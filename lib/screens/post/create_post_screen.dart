@@ -9,6 +9,7 @@ import '../../helpers/localization/app_local.dart';
 import '../../state/providers/post_providers/create_post_state_provider.dart';
 import '../../widgets/post/add_post/image_generation/generate_image_view.dart';
 import '../../widgets/post/add_post/review_post/review_post.dart';
+import '../../widgets/post/add_post/upload_post/upload_post.dart';
 import '../../widgets/post/add_post/write_caption/write_post_caption.dart';
 
 class CreatePostScreen extends ConsumerWidget {
@@ -25,6 +26,7 @@ class CreatePostScreen extends ConsumerWidget {
     bool isGeneratingState = state == CreatePostState.generate;
     bool isEditingState = state == CreatePostState.edit;
     bool isReviewingState = state == CreatePostState.review;
+    bool isUploadState = state == CreatePostState.upload;
 
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +56,7 @@ class CreatePostScreen extends ConsumerWidget {
           Step(
             state: isEditingState
                 ? StepState.editing
-                : currentStep != 1 && currentStep != 2
+                : currentStep != 1 && currentStep != 2 && currentStep != 3
                     ? StepState.disabled
                     : StepState.complete,
             isActive: isEditingState,
@@ -64,12 +66,22 @@ class CreatePostScreen extends ConsumerWidget {
           Step(
             state: isReviewingState
                 ? StepState.editing
-                : currentStep != 2
+                : currentStep != 2 && currentStep != 3
                     ? StepState.disabled
                     : StepState.complete,
             isActive: isReviewingState,
             title: Text(AppLocal.tr(context, 'app.review_your_post')),
             content: isReviewingState ? const ReviewPost() : Container(),
+          ),
+          Step(
+            state: isUploadState
+                ? StepState.editing
+                : currentStep != 3
+                    ? StepState.disabled
+                    : StepState.complete,
+            isActive: isUploadState,
+            title: Text(AppLocal.tr(context, 'app.done')),
+            content: isUploadState ? const UploadPost() : Container(),
           ),
         ],
       ).padding([Edge.all], AppPadding.p12),
