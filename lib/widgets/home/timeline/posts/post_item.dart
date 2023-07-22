@@ -32,7 +32,8 @@ class PostItem extends StatelessWidget {
                   ImageFileView(
                     width: AppSize.s35,
                     height: AppSize.s35,
-                    dir: "${LocalDirectoryName.usersProfile}/${post.user.id}",
+                    dir:
+                        "${LocalDirectoryName.usersProfile}/${post.userProfile.uid}",
                     image: null, //post.user.image,
                     border: Border.all(
                       width: AppSize.s2,
@@ -46,7 +47,7 @@ class PostItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        post.user.name,
+                        post.userProfile.name,
                         style: context.textTheme.displayMedium,
                       ),
                       Text(
