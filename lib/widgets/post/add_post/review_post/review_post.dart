@@ -9,8 +9,8 @@ import '../../../../constants/extensions/media_query/media_query_extension.dart'
 import '../../../../constants/extensions/theme/theme_extension.dart';
 import '../../../../constants/values_manager/values_manager.dart';
 import '../../../../helpers/localization/app_local.dart';
-import '../../../../state/providers/post_providers/create_post_provider.dart';
-import '../../../../state/providers/post_providers/create_post_state_provider.dart';
+import '../../../../state/providers/post_providers/add_post_providers/create_post_provider.dart';
+import '../../../../state/providers/post_providers/add_post_providers/create_post_state_provider.dart';
 
 class ReviewPost extends ConsumerWidget {
   const ReviewPost({super.key});

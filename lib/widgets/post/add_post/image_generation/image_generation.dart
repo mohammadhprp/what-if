@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../constants/enums/generate_status.dart';
-import '../../../../../state/providers/post_providers/generate_image_provider.dart';
+import '../../../../state/providers/post_providers/add_post_providers/generate_image_provider.dart';
 import 'image_generation_state/generating_image_in_progress.dart';
 import 'image_generation_state/image_generation_failed.dart';
 import 'image_generation_state/image_generation_successful.dart';
