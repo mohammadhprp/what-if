@@ -40,10 +40,11 @@ class Posts extends HookConsumerWidget {
             },
             itemBuilder: (BuildContext context, int index) {
               final post = posts[index];
+
               return Column(
                 children: [
                   PostItem(post: post),
-                  if (index == length)
+                  if (index == length - 1)
                     SizedBox(
                       height: context.height * 0.1,
                     )
