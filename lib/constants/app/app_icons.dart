@@ -19,13 +19,15 @@ class AppIcons {
   static const camera = '$_path/camera.svg';
   static const clock = '$_path/clock.svg';
   static const closeCircle = '$_path/close-circle.svg';
+  static const comment = '$_path/comment.svg';
   static const download = '$_path/download.svg';
   static const edit = '$_path/edit.svg';
   static const eye = '$_path/eye.svg';
   static const eyeSlash = '$_path/eye-slash.svg';
   static const filter = '$_path/filter.svg';
   static const gallery = '$_path/gallery.svg';
-  static const group = '$_path/group.svg';
+  static const heart = '$_path/heart.svg';
+  static const heartBold = '$_path/heart-bold.svg';
   static const house = '$_path/house.svg';
   static const infoCircle = '$_path/info-circle.svg';
   static const location = '$_path/location.svg';
