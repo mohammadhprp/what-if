@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../components/icon/icon_view.dart';
 import '../../../../components/images/image_file_view.dart';
+import '../../../../constants/app/app_icons.dart';
 import '../../../../constants/database/local_directory_name.dart';
 import '../../../../constants/extensions/date_time/date_time.dart';
 import '../../../../constants/extensions/media_query/media_query_extension.dart';
@@ -18,7 +20,7 @@ class PostItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: context.height * 0.25,
+      height: context.height * 0.3,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -77,6 +79,40 @@ class PostItem extends StatelessWidget {
             dir: "${LocalDirectoryName.posts}/${post.id}",
             image: null, //post.image,
           ),
+          const SizedBox(height: AppSize.s12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                ),
+                onPressed: () {
+                  // TODO: like the post
+                },
+                icon: IconView(
+                  icon: AppIcons.heart,
+                  color: context.colors.onBackground,
+                ),
+                label: Text("${post.likeCount}"),
+              ),
+              const SizedBox(width: AppSize.s8),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                ),
+                onPressed: () {
+                  // TODO: Got to comment page
+                },
+                icon: IconView(
+                  icon: AppIcons.comment,
+                  color: context.colors.onBackground,
+                ),
+                label: Text("${post.commentCount}"),
+              ),
+            ],
+          )
         ],
       ).padding([Edge.horizontal], AppPadding.p18),
     );
