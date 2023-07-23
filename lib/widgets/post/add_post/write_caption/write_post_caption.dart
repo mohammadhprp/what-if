@@ -5,8 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../components/text_field/text_box_field.dart';
 import '../../../../constants/enums/create_post_state.dart';
 import '../../../../helpers/localization/app_local.dart';
-import '../../../../state/providers/post_providers/create_post_provider.dart';
-import '../../../../state/providers/post_providers/create_post_state_provider.dart';
+import '../../../../state/providers/post_providers/add_post_providers/create_post_provider.dart';
+import '../../../../state/providers/post_providers/add_post_providers/create_post_state_provider.dart';
 
 class WritePostCaption extends HookConsumerWidget {
   const WritePostCaption({super.key});

@@ -9,8 +9,10 @@ import '../../../../constants/extensions/media_query/media_query_extension.dart'
 import '../../../../constants/extensions/theme/theme_extension.dart';
 import '../../../../constants/values_manager/values_manager.dart';
 import '../../../../helpers/localization/app_local.dart';
-import '../../../../state/providers/post_providers/create_post_provider.dart';
-import '../../../../state/providers/post_providers/create_post_state_provider.dart';
+import '../../../../state/providers/post_providers/add_post_providers/add_post_provider.dart';
+import '../../../../state/providers/post_providers/add_post_providers/create_post_provider.dart';
+import '../../../../state/providers/post_providers/add_post_providers/create_post_state_provider.dart';
+import '../../../../state/providers/post_providers/post_list_providers/post_list_provider.dart';
 
 class ReviewPost extends ConsumerWidget {
   const ReviewPost({super.key});
@@ -68,7 +70,11 @@ class ReviewPost extends ConsumerWidget {
               text: AppLocal.tr(context, 'app.loading'),
             );
 
-            // await ref.read(addPostProvider).store(provider);
+            // Store the post
+            final post = await ref.read(addPostProvider).store(provider);
+
+            // Add stored post in the post list
+            await ref.read(postListProvider).add(post);
 
             // Hide loading popup
             LoadingScreen.instance().hide();

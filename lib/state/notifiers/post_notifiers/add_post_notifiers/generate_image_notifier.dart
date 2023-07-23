@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../constants/enums/generate_status.dart';
-import '../../backend/post/generate_image.dart';
+import '../../../../constants/enums/generate_status.dart';
+import '../../../backend/post/generate_image.dart';
 
 class GenerateImageNotifier extends StateNotifier<GenerateStatus> {
   GenerateImageNotifier() : super(GenerateStatus.notStarted);

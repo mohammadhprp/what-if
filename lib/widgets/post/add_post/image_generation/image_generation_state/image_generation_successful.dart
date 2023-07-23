@@ -7,9 +7,9 @@ import '../../../../../../constants/app/app_colors.dart';
 import '../../../../../../constants/enums/create_post_state.dart';
 import '../../../../../../constants/extensions/media_query/media_query_extension.dart';
 import '../../../../../../helpers/localization/app_local.dart';
-import '../../../../../../state/providers/post_providers/create_post_provider.dart';
-import '../../../../../../state/providers/post_providers/create_post_state_provider.dart';
-import '../../../../../../state/providers/post_providers/generate_image_provider.dart';
+import '../../../../../state/providers/post_providers/add_post_providers/create_post_provider.dart';
+import '../../../../../state/providers/post_providers/add_post_providers/create_post_state_provider.dart';
+import '../../../../../state/providers/post_providers/add_post_providers/generate_image_provider.dart';
 import 'image_generator_place_holder.dart';
 
 class ImageGenerationSuccessful extends ConsumerWidget {

@@ -4,12 +4,13 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart' show immutable;
 
 import '../../constants/database/database_column_name.dart';
+import '../../constants/database/database_table_name.dart';
 import '../user_profile/user_profile_model.dart';
 
 @immutable
 class PostModel extends MapView<String, dynamic> {
   final int id;
-  final UserProfileModel user;
+  final UserProfileModel userProfile;
   final String prompt;
   final String caption;
   final String image;
@@ -19,7 +20,7 @@ class PostModel extends MapView<String, dynamic> {
 
   PostModel({
     required this.id,
-    required this.user,
+    required this.userProfile,
     required this.caption,
     required this.prompt,
     required this.image,
@@ -29,7 +30,7 @@ class PostModel extends MapView<String, dynamic> {
   }) : super(
           {
             DatabaseColumnName.id: id,
-            DatabaseColumnName.user: user,
+            DatabaseTableName.userProfiles: userProfile,
             DatabaseColumnName.caption: caption,
             DatabaseColumnName.prompt: prompt,
             DatabaseColumnName.image: image,
@@ -42,7 +43,9 @@ class PostModel extends MapView<String, dynamic> {
   PostModel.fromJson(Map<String, dynamic> json)
       : this(
           id: json[DatabaseColumnName.id],
-          user: UserProfileModel.fromJson(json[DatabaseColumnName.user]),
+          userProfile: UserProfileModel.fromJson(
+            json[DatabaseTableName.userProfiles],
+          ),
           caption: json[DatabaseColumnName.caption],
           prompt: json[DatabaseColumnName.prompt],
           image: json[DatabaseColumnName.image],
@@ -55,7 +58,7 @@ class PostModel extends MapView<String, dynamic> {
 
   Map<String, dynamic> toJson() => {
         DatabaseColumnName.id: id,
-        DatabaseColumnName.user: user.toJson(),
+        DatabaseColumnName.user: userProfile.toJson(),
         DatabaseColumnName.prompt: prompt,
         DatabaseColumnName.caption: caption,
         DatabaseColumnName.image: image,
@@ -66,7 +69,7 @@ class PostModel extends MapView<String, dynamic> {
 
   PostModel copyWith({String? caption, String? image}) => PostModel(
         id: id,
-        user: user,
+        userProfile: userProfile,
         prompt: prompt,
         caption: caption ?? this.caption,
         image: image ?? this.image,
@@ -81,7 +84,7 @@ class PostModel extends MapView<String, dynamic> {
       other is PostModel &&
           runtimeType == other.runtimeType &&
           id == other.id &&
-          user == other.user &&
+          userProfile == other.userProfile &&
           prompt == other.prompt &&
           caption == other.caption &&
           image == other.image &&
@@ -93,7 +96,7 @@ class PostModel extends MapView<String, dynamic> {
   int get hashCode => Object.hashAll(
         [
           id,
-          user,
+          userProfile,
           prompt,
           caption,
           image,

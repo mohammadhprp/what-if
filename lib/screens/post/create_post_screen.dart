@@ -6,7 +6,7 @@ import '../../constants/extensions/theme/theme_extension.dart';
 import '../../constants/extensions/widget/padding_extension.dart';
 import '../../constants/values_manager/values_manager.dart';
 import '../../helpers/localization/app_local.dart';
-import '../../state/providers/post_providers/create_post_state_provider.dart';
+import '../../state/providers/post_providers/add_post_providers/create_post_state_provider.dart';
 import '../../widgets/post/add_post/image_generation/generate_image_view.dart';
 import '../../widgets/post/add_post/review_post/review_post.dart';
 import '../../widgets/post/add_post/upload_post/upload_post.dart';

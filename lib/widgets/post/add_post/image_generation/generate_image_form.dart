@@ -5,8 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../components/text_field/prompt_box_field.dart';
 import '../../../../../helpers/localization/app_local.dart';
 import '../../../../../models/post/create_post_model.dart';
-import '../../../../../state/providers/post_providers/create_post_provider.dart';
-import '../../../../../state/providers/post_providers/generate_image_provider.dart';
+import '../../../../state/providers/post_providers/add_post_providers/create_post_provider.dart';
+import '../../../../state/providers/post_providers/add_post_providers/generate_image_provider.dart';
 
 class GenerateImageForm extends HookConsumerWidget {
   const GenerateImageForm({super.key});
