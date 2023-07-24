@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../components/icon/icon_view.dart';
-import '../../../../components/images/image_file_view.dart';
+import '../../../../components/images/image_network_view.dart';
 import '../../../../constants/app/app_icons.dart';
-import '../../../../constants/database/local_directory_name.dart';
 import '../../../../constants/extensions/date_time/date_time.dart';
 import '../../../../constants/extensions/media_query/media_query_extension.dart';
 import '../../../../constants/extensions/string/truncate.dart';
@@ -20,7 +19,7 @@ class PostItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: context.height * 0.3,
+      height: context.height * 0.4,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -31,16 +30,15 @@ class PostItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ImageFileView(
-                    width: AppSize.s35,
-                    height: AppSize.s35,
-                    dir:
-                        "${LocalDirectoryName.usersProfile}/${post.userProfile.uid}",
-                    image: null, //post.user.image,
+                  ImageNetworkView(
+                    width: AppSize.s40,
+                    height: AppSize.s40,
+                    image: post.userProfile.image ?? '',
                     border: Border.all(
                       width: AppSize.s2,
                       color: context.theme.colorScheme.primary,
                     ),
+                    radius: AppSize.s20,
                     fit: BoxFit.cover,
                   ),
                   const SizedBox(width: AppSize.s30),
@@ -74,10 +72,12 @@ class PostItem extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSize.s12),
-          ImageFileView(
-            height: context.height * 0.12,
-            dir: "${LocalDirectoryName.posts}/${post.id}",
-            image: null, //post.image,
+          ImageNetworkView(
+            height: context.height * 0.23,
+            width: context.width,
+            image: post.image,
+            fit: BoxFit.fitWidth,
+            radius: AppSize.s12,
           ),
           const SizedBox(height: AppSize.s12),
           Row(
