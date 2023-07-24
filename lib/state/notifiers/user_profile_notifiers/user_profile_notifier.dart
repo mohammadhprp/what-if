@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,7 +13,9 @@ import '../../../constants/extensions/logger/logger_extension.dart';
 import '../../../helpers/storage/local_directory.dart';
 import '../../../helpers/storage/local_storage.dart' as lg;
 import '../../../models/user_profile/user_profile_model.dart';
+import '../../../services/supabase_service.dart';
 import '../../../utils/exceptions/message_exception.dart';
+import '../../../utils/storage/user_info.dart';
 
 class UserProfileNotifier extends StateNotifier<UserProfileModel?> {
   UserProfileNotifier() : super(null);
@@ -57,9 +58,11 @@ class UserProfileNotifier extends StateNotifier<UserProfileModel?> {
 
       // Upload image
       if (image != null && profile.image != state?.image) {
-        final path = await supabase.storage
-            .from(StorageBucketName.userProfileImages)
-            .upload('$userId/${image.getFileName}', image);
+        final path = await supabase.upload(
+          StorageBucketName.userProfileImages,
+          '$userId/${image.getFileName}',
+          image,
+        );
 
         final newImagePath = path.split('/').last;
 
@@ -88,10 +91,11 @@ class UserProfileNotifier extends StateNotifier<UserProfileModel?> {
       }
 
       // Update backend database
-      await supabase
-          .from(DatabaseTableName.userProfiles)
-          .update(fields)
-          .match({DatabaseColumnName.userId: userId});
+      await supabase.update(
+        DatabaseTableName.userProfiles,
+        fields,
+        {DatabaseColumnName.userId: userId},
+      );
 
       // Update local storage
       _storeUserProfile(profile: profile);

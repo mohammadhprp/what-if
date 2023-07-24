@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../constants/database/database_column_name.dart';
 import '../../../../constants/database/database_table_name.dart';
@@ -10,12 +9,13 @@ import '../../../../constants/extensions/logger/logger_extension.dart';
 import '../../../../helpers/storage/local_storage.dart' as lg;
 import '../../../../models/post/create_post_model.dart';
 import '../../../../models/post/post_model.dart';
+import '../../../../services/supabase_service.dart';
 import '../../../../utils/exceptions/message_exception.dart';
 import '../../../../utils/storage/user_info.dart';
 
 class AddPostNotifier extends ChangeNotifier {
+  final supabase = SupabaseService();
   Future<PostModel> store(CreatePostModel post) async {
-    // create a post
     try {
       final supabase = Supabase.instance.client;
 
@@ -24,47 +24,66 @@ class AddPostNotifier extends ChangeNotifier {
       final image = post.image!;
 
       // Upload post image
-      final path = await supabase.storage
-          .from(StorageBucketName.postImages)
-          .upload('$userId/${image.getFileName}', image);
+      final path = await supabase.upload(
+        StorageBucketName.postImages,
+        '$userId/${image.getFileName}',
+        image,
+      );
+      // Delete the generated image from device after upload
+      image.delete();
 
       // Insert post data
       Map<String, dynamic> fields = {
         DatabaseColumnName.userId: userId,
         DatabaseColumnName.prompt: post.prompt,
         DatabaseColumnName.caption: post.caption,
-        DatabaseColumnName.image: path,
+        DatabaseColumnName.image: path.split('/').last,
       };
+      final Map<String, dynamic> response = await supabase.insert(
+        DatabaseTableName.posts,
+        fields,
+      );
 
-      final Map<String, dynamic> response = await supabase
-          .from(DatabaseTableName.posts)
-          .insert(fields)
-          .select()
-          .single();
-
-      // Delete the generated image from device
-      image.delete();
-
-      /// Replace user_id to user_profiles
-      // Convert the map into a list
-      List<MapEntry<String, dynamic>> responseList = response.entries.toList();
-      // Find and re  move the entry with the key "user_id"
-      responseList
-          .removeWhere((entry) => entry.key == DatabaseColumnName.userId);
-      final currentUserProfile = await UserInfo.profile();
-
-      // Add a new entry with the key "user_profiles"
-      responseList.add(MapEntry(
-        DatabaseTableName.userProfiles,
-        currentUserProfile.toJson(),
-      ));
-      // Convert the list back into a map
-      final modifiedResponse = Map.fromEntries(responseList);
+      /// Replace user_id to user_profiles and get image public url
+      final modifiedResponse = await _convertResponseToPostModel(response);
 
       return PostModel.fromJson(modifiedResponse);
     } on Exception catch (e) {
       e.eLog();
       throw MessageException('error.failed_to_add_post');
     }
+  }
+
+  Future<Map<String, dynamic>> _convertResponseToPostModel(
+    Map<String, dynamic> response,
+  ) async {
+    final userId = await UserInfo.userId();
+    // Convert the map into a list
+    List<MapEntry<String, dynamic>> responseList = response.entries.toList();
+    // Find and re  move the entry with the key "user_id"
+    responseList.removeWhere(
+      (entry) => entry.key == DatabaseColumnName.userId,
+    );
+
+    final imageUrl = supabase.publicUrl(
+      StorageBucketName.postImages,
+      "$userId/${response['image']}",
+    );
+
+    response.update(
+      DatabaseColumnName.image,
+      (value) => imageUrl,
+    );
+
+    // Add a new entry with the key "user_profiles"
+    final currentUserProfile = await UserInfo.profile();
+    responseList.add(MapEntry(
+      DatabaseTableName.userProfiles,
+      currentUserProfile.toJson(),
+    ));
+    // Convert the list back into a map
+    final modifiedResponse = Map.fromEntries(responseList);
+
+    return modifiedResponse;
   }
 }
