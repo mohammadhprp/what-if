@@ -18,4 +18,12 @@ class UserInfo {
 
     return UserProfileModel.fromJson(profile);
   }
+
+  static Future<String> userId() async {
+    final uid = await LocalStorage.get(key: LocalStorageName.userId);
+    if (uid == null) {
+      throw Exception('User ID is null');
+    }
+    return uid;
+  }
 }

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,7 +13,9 @@ import '../../../constants/extensions/logger/logger_extension.dart';
 import '../../../helpers/storage/local_directory.dart';
 import '../../../helpers/storage/local_storage.dart' as lg;
 import '../../../models/user_profile/user_profile_model.dart';
+import '../../../services/supabase_service.dart';
 import '../../../utils/exceptions/message_exception.dart';
+import '../../../utils/storage/user_info.dart';
 
 class UserProfileNotifier extends StateNotifier<UserProfileModel?> {
   UserProfileNotifier() : super(null);
@@ -47,9 +48,9 @@ class UserProfileNotifier extends StateNotifier<UserProfileModel?> {
     File? image,
   }) async {
     try {
-      final supabase = Supabase.instance.client;
+      final supabase = SupabaseService();
 
-      final userId = await lg.LocalStorage.get(key: LocalStorageName.userId);
+      final userId = await UserInfo.userId();
 
       Map<String, String> fields = {
         DatabaseColumnName.name: profile.name,
@@ -57,9 +58,11 @@ class UserProfileNotifier extends StateNotifier<UserProfileModel?> {
 
       // Upload image
       if (image != null && profile.image != state?.image) {
-        final path = await supabase.storage
-            .from(StorageBucketName.userProfileImages)
-            .upload('$userId/${image.getFileName}', image);
+        final path = await supabase.upload(
+          StorageBucketName.userProfileImages,
+          '$userId/${image.getFileName}',
+          image,
+        );
 
         final newImagePath = path.split('/').last;
 
@@ -88,10 +91,11 @@ class UserProfileNotifier extends StateNotifier<UserProfileModel?> {
       }
 
       // Update backend database
-      await supabase
-          .from(DatabaseTableName.userProfiles)
-          .update(fields)
-          .match({DatabaseColumnName.userId: userId});
+      await supabase.update(
+        DatabaseTableName.userProfiles,
+        fields,
+        {DatabaseColumnName.userId: userId},
+      );
 
       // Update local storage
       _storeUserProfile(profile: profile);
@@ -114,7 +118,7 @@ class UserProfileNotifier extends StateNotifier<UserProfileModel?> {
         "${DatabaseColumnName.image}, "
         "${DatabaseColumnName.createdAt}";
 
-    final userId = await lg.LocalStorage.get(key: LocalStorageName.userId);
+    final userId = await UserInfo.userId();
 
     final Map<String, dynamic> response = await supabase
         .from(DatabaseTableName.userProfiles)
@@ -148,17 +152,7 @@ class UserProfileNotifier extends StateNotifier<UserProfileModel?> {
 
   /// Fetch user  profile info from local storage
   Future<UserProfileModel> _fetchFromLocal() async {
-    final userProfile = await lg.LocalStorage.get(
-      key: LocalStorageName.userProfile,
-    );
-
-    if (userProfile == null) {
-      throw Exception('User profile is null');
-    }
-
-    final profile = jsonDecode(userProfile);
-
-    return UserProfileModel.fromJson(profile);
+    return UserInfo.profile();
   }
 
   Future<void> _storeUserProfile({required UserProfileModel profile}) async {
