@@ -67,7 +67,7 @@ class AddPostNotifier extends ChangeNotifier {
 
     final imageUrl = supabase.publicUrl(
       StorageBucketName.postImages,
-      "$userId/${response['image']}",
+      "$userId/${response[DatabaseColumnName.image]}",
     );
 
     response.update(

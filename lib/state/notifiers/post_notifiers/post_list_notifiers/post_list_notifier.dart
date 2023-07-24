@@ -49,6 +49,17 @@ class PostListNotifier extends ChangeNotifier {
       final List<PostModel> loaded = [];
 
       for (var post in response) {
+        post[DatabaseColumnName.image] = await supabase.publicUrl(
+          StorageBucketName.postImages,
+          "$userId/${post[DatabaseColumnName.image]}",
+        );
+
+        post[DatabaseTableName.userProfiles][DatabaseColumnName.image] =
+            await supabase.publicUrl(
+          StorageBucketName.userProfileImages,
+          "$userId/${post[DatabaseTableName.userProfiles][DatabaseColumnName.image]}",
+        );
+
         loaded.add(PostModel.fromJson(post));
       }
 
