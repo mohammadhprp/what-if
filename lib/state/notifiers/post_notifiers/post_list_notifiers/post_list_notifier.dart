@@ -18,6 +18,8 @@ class PostListNotifier extends ChangeNotifier {
 
   Future<void> fetch() async {
     try {
+      final userId = await UserInfo.userId();
+
       _isLoading = true;
 
       final supabase = SupabaseService();

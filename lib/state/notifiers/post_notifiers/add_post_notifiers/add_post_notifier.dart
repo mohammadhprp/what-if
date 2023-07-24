@@ -2,11 +2,9 @@ import 'package:flutter/foundation.dart';
 
 import '../../../../constants/database/database_column_name.dart';
 import '../../../../constants/database/database_table_name.dart';
-import '../../../../constants/database/local_storage_name.dart';
 import '../../../../constants/database/storage_bucket_name.dart';
 import '../../../../constants/extensions/file/get_file.dart';
 import '../../../../constants/extensions/logger/logger_extension.dart';
-import '../../../../helpers/storage/local_storage.dart' as lg;
 import '../../../../models/post/create_post_model.dart';
 import '../../../../models/post/post_model.dart';
 import '../../../../services/supabase_service.dart';
@@ -17,9 +15,11 @@ class AddPostNotifier extends ChangeNotifier {
   final supabase = SupabaseService();
   Future<PostModel> store(CreatePostModel post) async {
     try {
-      final supabase = Supabase.instance.client;
+      final userId = await UserInfo.userId();
 
-      final userId = await lg.LocalStorage.get(key: LocalStorageName.userId);
+      if (post.image == null) {
+        throw Exception('the given image is null!');
+      }
 
       final image = post.image!;
 
