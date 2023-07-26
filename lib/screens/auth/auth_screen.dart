@@ -27,7 +27,7 @@ class AuthScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppLocal.tr(context, 'app.welcome_to_what_if'),
+                AppLocal.tr(context, 'auth.welcome_to_what_if'),
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                       fontSize: FontSize.s35,
                     ),
@@ -35,7 +35,7 @@ class AuthScreen extends StatelessWidget {
               Text(
                 AppLocal.tr(
                   context,
-                  'app.unlock_a_world_of_imagination_and_explore_limitless_possibilities',
+                  'auth.unlock_a_world_of_imagination_and_explore_limitless_possibilities',
                 ),
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontSize: FontSize.s20,
@@ -55,7 +55,7 @@ class AuthScreen extends StatelessWidget {
                       Navigator.of(context).pushNamed(RegisterScreen.routeName);
                     },
                     child: Text(
-                      AppLocal.tr(context, 'app.register'),
+                      AppLocal.tr(context, 'button.register'),
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
@@ -65,7 +65,7 @@ class AuthScreen extends StatelessWidget {
                       Navigator.of(context).pushNamed(LoginScreen.routeName);
                     },
                     child: Text(
-                      AppLocal.tr(context, 'app.login'),
+                      AppLocal.tr(context, 'button.login'),
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
@@ -76,7 +76,7 @@ class AuthScreen extends StatelessWidget {
                 children: [
                   const Expanded(child: HorizontalDivider()),
                   Text(
-                    AppLocal.tr(context, 'app.or').toUpperCase(),
+                    AppLocal.tr(context, 'auth.or').toUpperCase(),
                   ).padding([Edge.horizontal], AppPadding.p8),
                   const Expanded(child: HorizontalDivider()),
                 ],
