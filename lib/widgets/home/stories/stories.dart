@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../components/loading/loading_view.dart';
 import '../../../constants/extensions/media_query/media_query_extension.dart';
 import '../../../constants/extensions/widget/padding_extension.dart';
 import '../../../constants/values_manager/values_manager.dart';
-import '../../../models/story/story_model.dart';
-import '../../../models/user_profile/user_profile_model.dart';
+import '../../../helpers/localization/app_local.dart';
+import '../../../state/providers/story_providers/story_list_provider.dart';
 import 'story_item.dart';
 
 class Stories extends HookConsumerWidget {
@@ -13,35 +14,41 @@ class Stories extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SizedBox(
-      height: context.height * 0.2,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(width: AppSize.s10);
-        },
-        itemBuilder: (BuildContext context, int index) {
-          return StoryItem(
-            story: StoryModel(
-              id: index,
-              user: UserProfileModel(
-                id: index,
-                uid: 'uid-$index',
-                name: 'name$index',
-                image: 'image-$index.jpg',
-                createdAt: DateTime.now().add(
-                  Duration(seconds: index),
-                ),
-              ),
-              image: 'image-$index.jpg',
-              createdAt: DateTime.now().add(
-                Duration(seconds: index),
-              ),
-            ),
+    final fetchStories = ref.watch(fetchStoriesProvider);
+    return fetchStories.when(
+      data: (_) {
+        final provider = ref.watch(storyListProvider);
+        final stories = provider.list;
+        final length = stories.length;
+
+        if (stories.isEmpty) {
+          return Center(
+            child: Text(AppLocal.tr(context, 'app.empty_list')),
           );
-        },
-      ),
-    ).padding([Edge.leading], AppPadding.p10);
+        }
+        return SizedBox(
+          height: context.height * 0.2,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: length,
+            separatorBuilder: (BuildContext context, int index) {
+              return const SizedBox(width: AppSize.s10);
+            },
+            itemBuilder: (BuildContext context, int index) {
+              final story = stories[index];
+              return Row(
+                children: [
+                  StoryItem(
+                    story: story,
+                  ),
+                ],
+              );
+            },
+          ),
+        ).padding([Edge.leading], AppPadding.p10);
+      },
+      error: (e, _) => const Text('error'),
+      loading: () => const LoadingView(),
+    );
   }
 }
