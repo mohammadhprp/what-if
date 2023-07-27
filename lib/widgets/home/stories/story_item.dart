@@ -22,6 +22,7 @@ class StoryItem extends StatelessWidget {
           child: CircleAvatar(
             radius: AppSize.s35,
             backgroundColor: context.theme.colorScheme.onBackground,
+            backgroundImage: NetworkImage(story.image),
           ),
         ),
         const SizedBox(height: AppSize.s12),

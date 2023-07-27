@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart' show immutable;
 
 import '../../constants/database/database_column_name.dart';
+import '../../constants/database/database_table_name.dart';
 import '../user_profile/user_profile_model.dart';
 
 @immutable
@@ -21,7 +22,7 @@ class StoryModel extends MapView<String, dynamic> {
   }) : super(
           {
             DatabaseColumnName.id: id,
-            DatabaseColumnName.user: user,
+            DatabaseTableName.userProfiles: user,
             DatabaseColumnName.image: image,
             DatabaseColumnName.createdAt: createdAt,
           },
@@ -30,7 +31,7 @@ class StoryModel extends MapView<String, dynamic> {
   StoryModel.fromJson(Map<String, dynamic> json)
       : this(
           id: json[DatabaseColumnName.id],
-          user: UserProfileModel.fromJson(json[DatabaseColumnName.user]),
+          user: UserProfileModel.fromJson(json[DatabaseTableName.userProfiles]),
           image: json[DatabaseColumnName.image],
           createdAt: DateTime.parse(json[DatabaseColumnName.createdAt]),
         );
@@ -39,7 +40,7 @@ class StoryModel extends MapView<String, dynamic> {
 
   Map<String, dynamic> toJson() => {
         DatabaseColumnName.id: id,
-        DatabaseColumnName.user: user.toJson(),
+        DatabaseTableName.userProfiles: user.toJson(),
         DatabaseColumnName.image: image,
         DatabaseColumnName.createdAt: createdAt.toIso8601String(),
       };
