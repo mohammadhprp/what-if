@@ -7,6 +7,7 @@ import '../../../constants/extensions/widget/padding_extension.dart';
 import '../../../constants/values_manager/values_manager.dart';
 import '../../../helpers/localization/app_local.dart';
 import '../../../state/providers/story_providers/story_list_provider.dart';
+import 'add_story.dart';
 import 'story_item.dart';
 
 class Stories extends HookConsumerWidget {
@@ -21,6 +22,7 @@ class Stories extends HookConsumerWidget {
       ),
       child: Row(
         children: [
+          const AddStory(),
           Expanded(
             child: fetchStories.when(
               data: (_) {
