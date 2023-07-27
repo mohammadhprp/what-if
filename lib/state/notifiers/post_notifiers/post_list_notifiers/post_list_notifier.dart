@@ -84,4 +84,19 @@ class PostListNotifier extends ChangeNotifier {
       throw MessageException('error.failed_to_add_post_to_post_list');
     }
   }
+
+  Future<void> update(int id, {int? likeCount, int? commentCount}) async {
+    try {
+      final update = _list.firstWhere(
+        (e) => e.id == id,
+      );
+
+      update.copyWith(likeCount: likeCount, commentCount: commentCount);
+      notifyListeners();
+    } catch (e) {
+      e.eLog();
+
+      throw MessageException('error.failed_to_update_post_to_post_list');
+    }
+  }
 }

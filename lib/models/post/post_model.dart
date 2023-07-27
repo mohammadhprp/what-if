@@ -67,14 +67,14 @@ class PostModel extends MapView<String, dynamic> {
         DatabaseColumnName.createdAt: createdAt.toIso8601String(),
       };
 
-  PostModel copyWith({String? caption, String? image}) => PostModel(
+  PostModel copyWith({int? likeCount, int? commentCount}) => PostModel(
         id: id,
         userProfile: userProfile,
         prompt: prompt,
-        caption: caption ?? this.caption,
-        image: image ?? this.image,
-        likeCount: likeCount,
-        commentCount: commentCount,
+        caption: caption,
+        image: image,
+        likeCount: likeCount ?? this.likeCount,
+        commentCount: commentCount ?? this.commentCount,
         createdAt: createdAt,
       );
 
