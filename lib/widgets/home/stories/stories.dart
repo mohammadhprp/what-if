@@ -15,40 +15,47 @@ class Stories extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final fetchStories = ref.watch(fetchStoriesProvider);
-    return fetchStories.when(
-      data: (_) {
-        final provider = ref.watch(storyListProvider);
-        final stories = provider.list;
-        final length = stories.length;
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppPadding.p10,
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: fetchStories.when(
+              data: (_) {
+                final provider = ref.watch(storyListProvider);
+                final stories = provider.list;
+                final length = stories.length;
 
-        if (stories.isEmpty) {
-          return Center(
-            child: Text(AppLocal.tr(context, 'app.empty_list')),
-          );
-        }
-        return SizedBox(
-          height: context.height * 0.2,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: length,
-            separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(width: AppSize.s10);
-            },
-            itemBuilder: (BuildContext context, int index) {
-              final story = stories[index];
-              return Row(
-                children: [
-                  StoryItem(
-                    story: story,
+                if (stories.isEmpty) {
+                  return Center(
+                    child: Text(AppLocal.tr(context, 'app.empty_list')),
+                  );
+                }
+                return SizedBox(
+                  height: context.height * 0.2,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: length,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(width: AppSize.s10);
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      final story = stories[index];
+                      return StoryItem(
+                        story: story,
+                      );
+                    },
                   ),
-                ],
-              );
-            },
+                ).padding([Edge.leading], AppPadding.p10);
+              },
+              error: (e, _) => const Text('error'),
+              loading: () => const LoadingView(),
+            ),
           ),
-        ).padding([Edge.leading], AppPadding.p10);
-      },
-      error: (e, _) => const Text('error'),
-      loading: () => const LoadingView(),
+        ],
+      ),
     );
   }
 }
