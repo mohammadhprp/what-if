@@ -35,4 +35,29 @@ class PostLikeNotifier extends ChangeNotifier {
       where,
     );
   }
+
+  Future<bool> isPostLiked(int postId) async {
+    final userId = await UserInfo.userId();
+
+    // Columns
+    String fields = """ 
+      "${DatabaseColumnName.userId}",
+      "${DatabaseColumnName.postId}"
+    """;
+
+    // Where
+    Map query = {
+      DatabaseColumnName.userId: userId,
+      DatabaseColumnName.postId: postId,
+    };
+
+    // Check if find any like post with give user_id and post_id
+    final data = await supabase.getWhere(
+      DatabaseTableName.postLikes,
+      fields,
+      query,
+    );
+
+    return data != null;
+  }
 }
