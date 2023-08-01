@@ -11,6 +11,7 @@ import '../../../../utils/exceptions/message_exception.dart';
 import '../../../../utils/storage/user_info.dart';
 
 class PostListNotifier extends ChangeNotifier {
+  final supabase = SupabaseService();
   IsLoading _isLoading = false;
   IsLoading get isLoading => _isLoading;
   List<PostModel> _list = [];
@@ -21,8 +22,6 @@ class PostListNotifier extends ChangeNotifier {
       final userId = await UserInfo.userId();
 
       _isLoading = true;
-
-      final supabase = SupabaseService();
 
       String fields = """
         ${DatabaseColumnName.id}, 
@@ -58,6 +57,10 @@ class PostListNotifier extends ChangeNotifier {
             await supabase.publicUrl(
           StorageBucketName.userProfileImages,
           "$userId/${post[DatabaseTableName.userProfiles][DatabaseColumnName.image]}",
+        );
+
+        post[DatabaseColumnName.isLiked] = await isPostLiked(
+          post[DatabaseColumnName.id],
         );
 
         loaded.add(PostModel.fromJson(post));
@@ -98,5 +101,30 @@ class PostListNotifier extends ChangeNotifier {
 
       throw MessageException('error.failed_to_update_post_to_post_list');
     }
+  }
+
+  Future<bool> isPostLiked(int postId) async {
+    final userId = await UserInfo.userId();
+
+    // Columns
+    String fields = """ 
+      "${DatabaseColumnName.userId}",
+      "${DatabaseColumnName.postId}"
+    """;
+
+    // Where
+    Map query = {
+      DatabaseColumnName.userId: userId,
+      DatabaseColumnName.postId: postId,
+    };
+
+    // Check if find any like post with give user_id and post_id
+    final data = await supabase.getWhere(
+      DatabaseTableName.postLikes,
+      fields,
+      query,
+    );
+
+    return data != null;
   }
 }
