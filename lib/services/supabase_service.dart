@@ -35,6 +35,21 @@ class SupabaseService {
     }
   }
 
+  Future<Map<String, dynamic>?> getWhere(
+    String table,
+    String columns,
+    Map match,
+  ) async {
+    try {
+      final Map<String, dynamic>? data =
+          await supabase.from(table).select(columns).match(match).maybeSingle();
+
+      return data;
+    } on Exception catch (e) {
+      throw Exception('failed to get data from supabase => Error [$e]');
+    }
+  }
+
   /// Insert data
   Future<Map<String, dynamic>> insert(
       String table, Map<String, dynamic> columns) async {
