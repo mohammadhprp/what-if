@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../components/icon/icon_view.dart';
 import '../../../../components/images/image_network_view.dart';
-import '../../../../constants/app/app_icons.dart';
 import '../../../../constants/extensions/date_time/date_time.dart';
 import '../../../../constants/extensions/media_query/media_query_extension.dart';
 import '../../../../constants/extensions/string/truncate.dart';
@@ -11,6 +9,8 @@ import '../../../../constants/extensions/widget/padding_extension.dart';
 import '../../../../constants/values_manager/font_manager.dart';
 import '../../../../constants/values_manager/values_manager.dart';
 import '../../../../models/post/post_model.dart';
+import '../../../post/post_comment_button/post_comment_button.dart';
+import '../../../post/post_like_button/post_like_button.dart';
 
 class PostItem extends StatelessWidget {
   final PostModel post;
@@ -84,33 +84,13 @@ class PostItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                ),
-                onPressed: () {
-                  // TODO: like the post
-                },
-                icon: IconView(
-                  icon: AppIcons.heart,
-                  color: context.colors.onBackground,
-                ),
-                label: Text("${post.likeCount}"),
+              PostLikeButton(
+                postId: post.id,
+                isPostAlreadyLiked: post.isLiked,
+                likeCount: post.likeCount,
               ),
               const SizedBox(width: AppSize.s8),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                ),
-                onPressed: () {
-                  // TODO: Got to comment page
-                },
-                icon: IconView(
-                  icon: AppIcons.comment,
-                  color: context.colors.onBackground,
-                ),
-                label: Text("${post.commentCount}"),
-              ),
+              PostCommentButton(commentCount: post.commentCount)
             ],
           )
         ],

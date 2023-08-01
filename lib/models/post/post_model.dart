@@ -14,6 +14,7 @@ class PostModel extends MapView<String, dynamic> {
   final String prompt;
   final String caption;
   final String image;
+  final bool isLiked;
   final int likeCount;
   final int commentCount;
   final DateTime createdAt;
@@ -24,6 +25,7 @@ class PostModel extends MapView<String, dynamic> {
     required this.caption,
     required this.prompt,
     required this.image,
+    required this.isLiked,
     required this.likeCount,
     required this.commentCount,
     required this.createdAt,
@@ -34,6 +36,7 @@ class PostModel extends MapView<String, dynamic> {
             DatabaseColumnName.caption: caption,
             DatabaseColumnName.prompt: prompt,
             DatabaseColumnName.image: image,
+            DatabaseColumnName.isLiked: isLiked,
             DatabaseColumnName.likeCount: likeCount,
             DatabaseColumnName.commentCount: commentCount,
             DatabaseColumnName.createdAt: createdAt,
@@ -49,6 +52,7 @@ class PostModel extends MapView<String, dynamic> {
           caption: json[DatabaseColumnName.caption],
           prompt: json[DatabaseColumnName.prompt],
           image: json[DatabaseColumnName.image],
+          isLiked: json[DatabaseColumnName.isLiked],
           likeCount: json[DatabaseColumnName.likeCount],
           commentCount: json[DatabaseColumnName.commentCount],
           createdAt: DateTime.parse(json[DatabaseColumnName.createdAt]),
@@ -62,19 +66,22 @@ class PostModel extends MapView<String, dynamic> {
         DatabaseColumnName.prompt: prompt,
         DatabaseColumnName.caption: caption,
         DatabaseColumnName.image: image,
+        DatabaseColumnName.isLiked: isLiked,
         DatabaseColumnName.likeCount: likeCount,
         DatabaseColumnName.commentCount: commentCount,
         DatabaseColumnName.createdAt: createdAt.toIso8601String(),
       };
 
-  PostModel copyWith({String? caption, String? image}) => PostModel(
+  PostModel copyWith({int? likeCount, int? commentCount, bool? isLiked}) =>
+      PostModel(
         id: id,
         userProfile: userProfile,
         prompt: prompt,
-        caption: caption ?? this.caption,
-        image: image ?? this.image,
-        likeCount: likeCount,
-        commentCount: commentCount,
+        caption: caption,
+        image: image,
+        isLiked: isLiked ?? this.isLiked,
+        likeCount: likeCount ?? this.likeCount,
+        commentCount: commentCount ?? this.commentCount,
         createdAt: createdAt,
       );
 
@@ -88,6 +95,7 @@ class PostModel extends MapView<String, dynamic> {
           prompt == other.prompt &&
           caption == other.caption &&
           image == other.image &&
+          isLiked == other.isLiked &&
           likeCount == other.likeCount &&
           commentCount == other.commentCount &&
           createdAt == other.createdAt;
@@ -100,6 +108,7 @@ class PostModel extends MapView<String, dynamic> {
           prompt,
           caption,
           image,
+          isLiked,
           likeCount,
           commentCount,
           createdAt,
