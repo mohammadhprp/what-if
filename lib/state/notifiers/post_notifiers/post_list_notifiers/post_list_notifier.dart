@@ -88,13 +88,23 @@ class PostListNotifier extends ChangeNotifier {
     }
   }
 
-  Future<void> update(int id, {int? likeCount, int? commentCount}) async {
+  Future<void> update(
+    int id, {
+    int? likeCount,
+    int? commentCount,
+    bool? isPostLiked,
+  }) async {
     try {
-      final update = _list.firstWhere(
+      final index = _list.indexWhere(
         (e) => e.id == id,
       );
 
-      update.copyWith(likeCount: likeCount, commentCount: commentCount);
+      _list[index] = _list[index].copyWith(
+        likeCount: likeCount,
+        isLiked: isPostLiked,
+        commentCount: commentCount,
+      );
+
       notifyListeners();
     } catch (e) {
       e.eLog();
