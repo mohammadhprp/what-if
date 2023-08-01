@@ -14,6 +14,7 @@ class DatabaseColumnName {
   static const prompt = 'prompt';
   static const caption = 'caption';
   static const likeCount = 'like_count';
+  static const isLiked = 'is_liked';
   static const commentCount = 'comment_count';
   static const createdAt = 'created_at';
 
