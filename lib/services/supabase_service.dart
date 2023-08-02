@@ -50,6 +50,25 @@ class SupabaseService {
     }
   }
 
+  /// Count with where
+  Future<int> countWhere({
+    required String table,
+    required String columns,
+    required String column,
+    required String value,
+  }) async {
+    try {
+      final res = await supabase
+          .from(table)
+          .select(columns, const FetchOptions(count: CountOption.exact))
+          .eq(column, value);
+
+      return res.count;
+    } on Exception catch (e) {
+      throw Exception('failed to fetch count data from supabase => Error [$e]');
+    }
+  }
+
   /// Insert data
   Future<Map<String, dynamic>> insert(
       String table, Map<String, dynamic> columns) async {
