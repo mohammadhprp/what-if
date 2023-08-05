@@ -124,4 +124,30 @@ class FollowNotifier extends StateNotifier<FollowCount> {
       throw MessageException('error.failed_to_unfollow_user');
     }
   }
+
+  Future<bool> isFollowed(String userId) async {
+    final currentUserId = await UserInfo.userId();
+
+    String fields = """
+      "${DatabaseColumnName.followerId}",
+      "${DatabaseColumnName.followingId}"
+    """;
+
+    Map<String, dynamic> where = {
+      DatabaseColumnName.followerId: currentUserId,
+      DatabaseColumnName.followingId: userId,
+    };
+
+    try {
+      final res = await supabase.getWhere(
+        DatabaseTableName.follows,
+        fields,
+        where,
+      );
+
+      return res != null;
+    } on Exception {
+      throw MessageException('error.failed_to_is_current_user_followed');
+    }
+  }
 }
