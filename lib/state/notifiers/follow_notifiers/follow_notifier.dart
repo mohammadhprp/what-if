@@ -54,15 +54,15 @@ class FollowNotifier extends StateNotifier<FollowCount> {
     try {
       final followCounts = await Future.wait<int>([
         supabase.countWhere(
-          table: DatabaseTableName.followers,
+          table: DatabaseTableName.follows,
           columns: fields,
-          column: DatabaseColumnName.followerId,
+          column: DatabaseColumnName.followingId,
           value: userId,
         ),
         supabase.countWhere(
-          table: DatabaseTableName.followers,
+          table: DatabaseTableName.follows,
           columns: fields,
-          column: DatabaseColumnName.followingId,
+          column: DatabaseColumnName.followerId,
           value: userId,
         )
       ]);
@@ -92,7 +92,7 @@ class FollowNotifier extends StateNotifier<FollowCount> {
       DatabaseColumnName.followingId: followingId,
     };
     try {
-      await supabase.insert(DatabaseTableName.followers, fields);
+      await supabase.insert(DatabaseTableName.follows, fields);
 
       // Update current user followings
       state = state.copyWith(following: state.following + 1);
@@ -110,7 +110,7 @@ class FollowNotifier extends StateNotifier<FollowCount> {
       DatabaseColumnName.followingId: followingId,
     };
     try {
-      await supabase.delete(DatabaseTableName.followers, fields);
+      await supabase.delete(DatabaseTableName.follows, fields);
 
       // Update current user followings
       state = state.copyWith(following: state.following - 1);

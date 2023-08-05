@@ -6,7 +6,7 @@ class DatabaseTableName {
   static const posts = 'posts';
   static const stories = 'stories';
   static const postLikes = 'post_likes';
-  static const followers = 'followers';
+  static const follows = 'follows';
 
   const DatabaseTableName._();
 }
