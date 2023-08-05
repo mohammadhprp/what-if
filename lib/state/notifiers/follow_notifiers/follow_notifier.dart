@@ -13,38 +13,44 @@ class FollowNotifier extends StateNotifier<FollowCount> {
   final supabase = SupabaseService();
 
   // Get current user followers and followings
-  Future<void> me() async {
+  Future<FollowCount> me() async {
     final userId = await UserInfo.userId();
 
     String fields = """
       "${DatabaseColumnName.followerId}",
-      "${DatabaseColumnName.followingId}",
+      "${DatabaseColumnName.followingId}"
     """;
 
-    final follower = await supabase.countWhere(
-      table: DatabaseTableName.followers,
-      columns: fields,
-      column: DatabaseColumnName.followerId,
-      value: userId,
-    );
+    try {
+      final follower = await supabase.countWhere(
+        table: DatabaseTableName.follows,
+        columns: fields,
+        column: DatabaseColumnName.followingId,
+        value: userId,
+      );
 
-    final following = await supabase.countWhere(
-      table: DatabaseTableName.followers,
-      columns: fields,
-      column: DatabaseColumnName.followingId,
-      value: userId,
-    );
+      final following = await supabase.countWhere(
+        table: DatabaseTableName.follows,
+        columns: fields,
+        column: DatabaseColumnName.followerId,
+        value: userId,
+      );
 
-    final follow = FollowCount(
-      follower: follower,
-      following: following,
-    );
+      final follow = FollowCount(
+        follower: follower,
+        following: following,
+      );
 
-    state = follow;
+      return follow;
+    } on Exception {
+      throw MessageException(
+        'error.failed_to_get_current_user_followers_and_following_count',
+      );
+    }
   }
 
   /// Get user following and follower count by given ID
-  Future<FollowCount> user(String userId) async {
+  Future<void> user(String userId) async {
     // Select fields
     String fields = """
       "${DatabaseColumnName.followerId}",
@@ -75,7 +81,7 @@ class FollowNotifier extends StateNotifier<FollowCount> {
         follower: follower,
         following: following,
       );
-      return follow;
+      state = follow;
     } on Exception {
       throw MessageException(
         'error.failed_to_get_user_follower_and_following_count',
