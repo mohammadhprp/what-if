@@ -7,7 +7,23 @@ final followProvider = StateNotifierProvider<FollowNotifier, FollowCount>(
   (_) => FollowNotifier(),
 );
 
-final myFollowProvider = FutureProvider((ref) async {
+final myFollowProvider = FutureProvider<FollowCount>((ref) async {
   final provider = ref.read(followProvider.notifier);
-  await provider.me();
+  return await provider.me();
+});
+
+final userFollowProvider = FutureProvider.family<void, String>((
+  ref,
+  userId,
+) async {
+  final provider = ref.read(followProvider.notifier);
+  return await provider.user(userId);
+});
+
+final isUserFollowedProvider = FutureProvider.family<bool, String>((
+  ref,
+  userId,
+) async {
+  final provider = ref.read(followProvider.notifier);
+  return await provider.isFollowed(userId);
 });
