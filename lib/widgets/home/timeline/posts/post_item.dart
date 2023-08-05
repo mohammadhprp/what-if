@@ -9,6 +9,7 @@ import '../../../../constants/extensions/widget/padding_extension.dart';
 import '../../../../constants/values_manager/font_manager.dart';
 import '../../../../constants/values_manager/values_manager.dart';
 import '../../../../models/post/post_model.dart';
+import '../../../follow/follow_button.dart';
 import '../../../post/post_comment_button/post_comment_button.dart';
 import '../../../post/post_like_button/post_like_button.dart';
 
@@ -19,7 +20,7 @@ class PostItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: context.height * 0.4,
+      height: context.height * 0.42,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,38 +28,43 @@ class PostItem extends StatelessWidget {
           Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ImageNetworkView(
-                    width: AppSize.s40,
-                    height: AppSize.s40,
-                    image: post.userProfile.image ?? '',
-                    border: Border.all(
-                      width: AppSize.s2,
-                      color: context.theme.colorScheme.primary,
-                    ),
-                    radius: AppSize.s20,
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(width: AppSize.s30),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      Text(
-                        post.userProfile.name,
-                        style: context.textTheme.displayMedium,
-                      ),
-                      Text(
-                        post.createdAt.format(),
-                        style: context.textTheme.titleSmall?.copyWith(
-                          color: context.theme.colorScheme.outline,
-                          fontSize: FontSize.s13,
+                      ImageNetworkView(
+                        width: AppSize.s40,
+                        height: AppSize.s40,
+                        image: post.userProfile.image ?? '',
+                        border: Border.all(
+                          width: AppSize.s2,
+                          color: context.theme.colorScheme.primary,
                         ),
+                        radius: AppSize.s20,
+                        fit: BoxFit.cover,
+                      ),
+                      const SizedBox(width: AppSize.s30),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            post.userProfile.name,
+                            style: context.textTheme.displayMedium,
+                          ),
+                          Text(
+                            post.createdAt.format(),
+                            style: context.textTheme.titleSmall?.copyWith(
+                              color: context.theme.colorScheme.outline,
+                              fontSize: FontSize.s13,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
+                  FollowButton(uid: post.userProfile.uid),
                 ],
               ),
               const SizedBox(height: AppSize.s8),
